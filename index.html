@@ -5,59 +5,77 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KIFY GAME STORE</title>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-:root {
- --bg:#090909;--card:#141414;--gold:#d8ad55;
- --gold2:#f5d58a;--muted:#999;--white:#fff;
+:root{
+ --bg:#090909;
+ --card:#151515;
+ --gold:#d8ad55;
+ --gold2:#f5d58a;
+ --white:#fff;
+ --muted:#999;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:white;font-family:Inter,Arial,sans-serif}
+body{
+ background:var(--bg);
+ color:white;
+ font-family:Inter,Arial,sans-serif;
+}
+button{cursor:pointer;font-family:inherit}
 header{
- position:sticky;top:0;z-index:10;background:#090909ee;
- border-bottom:1px solid #302719;padding:16px 5%;
- display:flex;justify-content:space-between;align-items:center;
- backdrop-filter:blur(12px)
+ position:sticky;top:0;z-index:10;
+ background:#090909ee;
+ border-bottom:1px solid #302719;
+ padding:15px 5%;
+ display:flex;justify-content:space-between;
+ align-items:center;backdrop-filter:blur(12px);
 }
 .logo{font-size:21px;font-weight:900;color:var(--gold2)}
 .logo span{color:white}
 nav{display:flex;gap:20px;align-items:center}
-nav a{color:#ddd;text-decoration:none;font-size:13px}
-button{cursor:pointer;font-family:inherit}
+nav a{color:#ddd;text-decoration:none;font-size:12px}
 .gold-btn{
  background:linear-gradient(135deg,#f5d58a,#b88732);
- border:0;color:#17100a;padding:12px 19px;border-radius:8px;
- font-weight:800
+ border:0;color:#17100a;padding:12px 18px;
+ border-radius:8px;font-weight:800;
 }
-.outline-btn{background:transparent;border:1px solid var(--gold);
- color:var(--gold2);padding:10px 15px;border-radius:8px}
+.outline-btn{
+ background:transparent;border:1px solid var(--gold);
+ color:var(--gold2);padding:10px 15px;border-radius:8px;
+}
 .hero{
  padding:75px 6% 65px;text-align:center;
- background:radial-gradient(ellipse at top,#49371955,transparent 65%)
+ background:radial-gradient(ellipse at top,#49371955,transparent 65%);
 }
-.tag{color:var(--gold);font-size:12px;letter-spacing:4px;font-weight:800}
+.tag{color:var(--gold);font-size:11px;letter-spacing:4px;font-weight:800}
 .hero h1{font-size:clamp(35px,7vw,68px);font-weight:900;margin:20px 0}
 .hero h1 span{color:var(--gold2)}
 .hero p{color:#aaa;line-height:1.8;max-width:550px;margin:auto;font-size:14px}
 .hero-actions{display:flex;justify-content:center;gap:12px;margin-top:27px}
 .section{padding:35px 5% 65px;max-width:1250px;margin:auto}
 .section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:25px}
-.section h2{font-size:25px}
+.section h2{font-size:24px}
 .section h2 span{color:var(--gold)}
+.search{
+ width:100%;padding:13px;background:#151515;
+ border:1px solid #333;color:white;border-radius:8px;
+ margin-bottom:18px;outline:none;
+}
 .filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:20px}
-.filter{padding:9px 15px;border:1px solid #333;border-radius:30px;
- color:#ccc;background:#151515;font-size:12px}
+.filter{
+ padding:9px 15px;border:1px solid #333;
+ border-radius:30px;color:#ccc;background:#151515;font-size:11px;
+}
 .filter.active{background:var(--gold);color:#17100a;border-color:var(--gold);font-weight:800}
-.search{width:100%;padding:13px;background:#151515;border:1px solid #333;
- color:white;border-radius:8px;margin-bottom:20px;outline:none}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:17px}
 .product{background:var(--card);border:1px solid #29251e;border-radius:12px;overflow:hidden}
 .product img{width:100%;height:165px;object-fit:cover;background:#222}
 .product-info{padding:15px}
 .category{font-size:10px;color:var(--gold);font-weight:800;letter-spacing:1px}
-.product h3{font-size:16px;margin:8px 0}
-.desc{font-size:12px;color:#999;line-height:1.6;min-height:36px}
+.product h3{font-size:15px;margin:8px 0}
+.desc{font-size:12px;color:#999;line-height:1.6;min-height:35px;white-space:pre-wrap}
 .price{color:var(--gold2);font-size:20px;font-weight:900;margin:13px 0}
 .product-actions{display:flex;gap:8px}
 .product-actions button{flex:1;font-size:11px}
@@ -68,26 +86,34 @@ button{cursor:pointer;font-family:inherit}
 .feature p{font-size:12px;color:#999;line-height:1.7}
 footer{text-align:center;padding:35px 15px;border-top:1px solid #302719;color:#888;font-size:12px}
 footer b{color:var(--gold2)}
-.modal{display:none;position:fixed;inset:0;background:#000c;z-index:30;
- justify-content:center;align-items:center;padding:15px}
+.modal{
+ display:none;position:fixed;inset:0;background:#000d;
+ z-index:30;justify-content:center;align-items:center;padding:15px;
+}
 .modal.show{display:flex}
-.modal-box{background:#171717;border:1px solid #70562e;border-radius:14px;
- width:100%;max-width:440px;padding:23px;max-height:90vh;overflow:auto}
+.modal-box{
+ background:#171717;border:1px solid #70562e;
+ border-radius:14px;width:100%;max-width:440px;
+ padding:23px;max-height:90vh;overflow:auto;
+}
 .modal-box h2{color:var(--gold2);margin-bottom:17px;font-size:21px}
 .field{margin-bottom:13px}
 .field label{display:block;color:#bbb;font-size:12px;margin-bottom:7px}
 .field input,.field textarea,.field select{
- width:100%;padding:12px;background:#090909;border:1px solid #383838;
- border-radius:7px;color:white;outline:none;font-family:inherit
+ width:100%;padding:12px;background:#090909;
+ border:1px solid #383838;border-radius:7px;
+ color:white;outline:none;font-family:inherit;
 }
 .field textarea{min-height:70px;resize:vertical}
 .full{width:100%;margin-top:8px}
 .close{float:right;background:none;border:0;color:white;font-size:23px}
 .admin-area{display:none;margin-top:22px;padding-top:18px;border-top:1px solid #444}
 .admin-area h3{color:var(--gold2);margin-bottom:15px}
-.admin-actions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}
-.admin-actions button{font-size:11px}
+.admin-actions{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}
+.admin-actions button{font-size:10px}
 .status{font-size:12px;color:#aaa;margin-top:10px;line-height:1.6}
+.admin-item{padding:12px;border-bottom:1px solid #444;font-size:12px}
+.admin-item button{margin:5px 3px}
 @media(max-width:600px){
  nav a{display:none}
  header{padding:13px 4%}
@@ -103,6 +129,7 @@ footer b{color:var(--gold2)}
 }
 </style>
 </head>
+
 <body>
 
 <header>
@@ -130,12 +157,15 @@ footer b{color:var(--gold2)}
   <h2>OUR <span>PRODUCTS</span></h2>
   <span class="tag">GAME ACCOUNTS</span>
  </div>
+
  <input class="search" id="search" placeholder="Search game accounts..." oninput="renderProducts()">
+
  <div class="filters">
   <button class="filter active" onclick="setFilter('ALL',this)">ALL</button>
   <button class="filter" onclick="setFilter('MLBB',this)">MOBILE LEGENDS</button>
   <button class="filter" onclick="setFilter('PUBG',this)">PUBG MOBILE</button>
  </div>
+
  <div class="grid" id="productsGrid">
   <div class="empty">Loading products...</div>
  </div>
@@ -163,9 +193,9 @@ footer b{color:var(--gold2)}
   <h2>PLACE YOUR ORDER</h2>
   <form id="orderForm">
    <div class="field"><label>Product</label><input id="orderProduct" readonly></div>
-   <div class="field"><label>Your Name</label><input id="customerName" required placeholder="Enter your name"></div>
-   <div class="field"><label>Telegram Username / Contact</label><input id="customerContact" required placeholder="@username"></div>
-   <div class="field"><label>Additional Details</label><textarea id="customerNote" placeholder="Your message (optional)"></textarea></div>
+   <div class="field"><label>Your Name</label><input id="customerName" required maxlength="80" placeholder="Enter your name"></div>
+   <div class="field"><label>Telegram Username / Contact</label><input id="customerContact" required maxlength="100" placeholder="@username"></div>
+   <div class="field"><label>Additional Details</label><textarea id="customerNote" maxlength="500" placeholder="Your message (optional)"></textarea></div>
    <button class="gold-btn full" type="submit">SUBMIT ORDER</button>
    <p class="status" id="orderStatus"></p>
   </form>
@@ -177,256 +207,496 @@ footer b{color:var(--gold2)}
  <div class="modal-box">
   <button class="close" onclick="closeModal('adminModal')">×</button>
   <h2>ADMIN PANEL</h2>
+
   <div id="loginArea">
    <div class="field"><label>Admin Email</label><input type="email" id="adminEmail"></div>
    <div class="field"><label>Password</label><input type="password" id="adminPassword"></div>
    <button class="gold-btn full" onclick="adminLogin()">LOGIN</button>
   </div>
+
   <div class="admin-area" id="adminArea">
    <h3>ADD / EDIT PRODUCT</h3>
    <input type="hidden" id="editId">
+
    <div class="field"><label>Product Name</label><input id="pName" placeholder="MLBB Account"></div>
+
    <div class="field"><label>Game</label>
-    <select id="pGame"><option>MLBB</option><option>PUBG</option></select>
+    <select id="pGame">
+     <option>MLBB</option>
+     <option>PUBG</option>
+    </select>
    </div>
+
    <div class="field"><label>Price (MMK)</label><input type="number" id="pPrice" min="0"></div>
    <div class="field"><label>Image URL</label><input id="pImage" placeholder="https://..."></div>
    <div class="field"><label>Description</label><textarea id="pDesc"></textarea></div>
+
    <button class="gold-btn full" onclick="saveProduct()">SAVE PRODUCT</button>
+
    <div class="admin-actions">
     <button class="outline-btn" onclick="loadProducts()">REFRESH</button>
     <button class="outline-btn" onclick="showOrders()">VIEW ORDERS</button>
     <button class="outline-btn" onclick="adminLogout()">LOGOUT</button>
    </div>
+
    <div id="adminProducts"></div>
    <div id="ordersList"></div>
   </div>
+
   <p class="status" id="adminStatus"></p>
  </div>
 </div>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut }
- from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs, getDoc, doc,
- updateDoc, deleteDoc, query, orderBy, serverTimestamp }
- from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+import { initializeApp }
+ from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+
+import {
+ getAuth, signInWithEmailAndPassword,
+ onAuthStateChanged, signOut
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+import {
+ getFirestore, collection, addDoc, getDocs,
+ getDoc, doc, updateDoc, deleteDoc,
+ query, orderBy, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+/* NEW FIREBASE CONFIG */
 
 const firebaseConfig = {
- apiKey:"AIzaSyCtacW6YbCwIWjPZ-jfNdheo1qcpJr3Yxs",
- authDomain:"kify-game-store-c71e5.firebaseapp.com",
- projectId:"kify-game-store-c71e5",
- storageBucket:"kify-game-store-c71e5.firebasestorage.app",
- messagingSenderId:"383451116516",
- appId:"1:383451116516:web:ddd75d28e7f4b7678d0df1",
- measurementId:"G-S4Y5B5MBMN"
+ apiKey: "AIzaSyCtacW6YbCwIWjPZ-jfNdheo1qcpJr3Yxs",
+ authDomain: "kify-game-store-c71e5.firebaseapp.com",
+ projectId: "kify-game-store-c71e5",
+ storageBucket: "kify-game-store-c71e5.firebasestorage.app",
+ messagingSenderId: "383451116516",
+ appId: "1:383451116516:web:3c16738b3bc3b3508d0df1",
+ measurementId: "G-BD3W0XZ1DT"
 };
 
-const app=initializeApp(firebaseConfig);
-const auth=getAuth(app);
-const db=getFirestore(app);
+/* INITIALIZE */
 
-let products=[];
-let filter='ALL';
-let isAdmin=false;
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-const $=id=>document.getElementById(id);
-const money=n=>Number(n||0).toLocaleString('en-US')+' MMK';
+let products = [];
+let filter = 'ALL';
+let isAdmin = false;
 
-window.setFilter=(value,btn)=>{
- filter=value;
- document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));
+const $ = id => document.getElementById(id);
+
+const money = n =>
+ Number(n || 0).toLocaleString('en-US') + ' MMK';
+
+function escapeHTML(s=''){
+ return String(s).replace(/[&<>"']/g,c=>({
+  '&':'&amp;',
+  '<':'&lt;',
+  '>':'&gt;',
+  '"':'&quot;',
+  "'":'&#39;'
+ }[c]));
+}
+
+function safeUrl(url=''){
+ try{
+  const u = new URL(url);
+  return ['https:','http:'].includes(u.protocol)
+   ? escapeHTML(url) : '';
+ }catch{
+  return '';
+ }
+}
+
+/* FILTER */
+
+window.setFilter = (value,btn)=>{
+ filter = value;
+
+ document.querySelectorAll('.filter')
+ .forEach(b=>b.classList.remove('active'));
+
  btn.classList.add('active');
  renderProducts();
 };
 
-window.renderProducts=()=>{
- const search=$('search').value.toLowerCase();
- const list=products.filter(p=>
+/* PRODUCT DISPLAY */
+
+window.renderProducts = ()=>{
+ const search = $('search').value.toLowerCase();
+
+ const list = products.filter(p=>
   (filter==='ALL'||p.game===filter) &&
-  ((p.name||'').toLowerCase().includes(search)||
-   (p.description||'').toLowerCase().includes(search))
+  (
+   (p.name||'').toLowerCase().includes(search) ||
+   (p.description||'').toLowerCase().includes(search)
+  )
  );
- $('productsGrid').innerHTML=list.length?list.map(p=>`
+
+ $('productsGrid').innerHTML = list.length
+ ? list.map(p=>`
  <article class="product">
-  <img src="${safeUrl(p.image)}" alt="Game account"
+
+  <img src="${safeUrl(p.image)}"
+   alt="Game account"
    onerror="this.src='https://placehold.co/500x300/171717/d8ad55?text=KIFY+GAME+STORE'">
+
   <div class="product-info">
+
    <div class="category">${escapeHTML(p.game||'GAME')}</div>
+
    <h3>${escapeHTML(p.name)}</h3>
+
    <div class="desc">${escapeHTML(p.description||'Premium game account')}</div>
+
    <div class="price">${money(p.price)}</div>
+
    <div class="product-actions">
+
     <button class="gold-btn" onclick="orderProduct('${p.id}')">ORDER NOW</button>
+
     ${isAdmin?`<button class="outline-btn" onclick="editProduct('${p.id}')">EDIT</button>`:''}
+
    </div>
   </div>
- </article>`).join(''):'<div class="empty">No products available yet.</div>';
+ </article>
+ `).join('')
+ : '<div class="empty">No products available yet.</div>';
 };
 
-function escapeHTML(s=''){
- return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-function safeUrl(url=''){
- try{
-  const u=new URL(url);
-  return ['https:','http:'].includes(u.protocol)?escapeHTML(url):'';
- }catch{return '';}
-}
+/* LOAD PRODUCTS */
 
 async function loadProducts(){
  try{
-  const snap=await getDocs(collection(db,'products'));
-  products=snap.docs.map(d=>({id:d.id,...d.data()}));
+  const snap = await getDocs(collection(db,'products'));
+
+  products = snap.docs.map(d=>({
+   id:d.id,
+   ...d.data()
+  }));
+
   renderProducts();
   renderAdminProducts();
+
  }catch(e){
-  $('productsGrid').innerHTML='<div class="empty">Unable to load products. Check Firebase Firestore Rules.</div>';
+  $('productsGrid').innerHTML =
+  '<div class="empty">Unable to load products. Check Firestore Rules.</div>';
+
   console.error(e);
  }
 }
-window.loadProducts=loadProducts;
 
-window.orderProduct=id=>{
- const p=products.find(x=>x.id===id);
+window.loadProducts = loadProducts;
+
+/* ORDER SYSTEM */
+
+window.orderProduct = id=>{
+ const p = products.find(x=>x.id===id);
  if(!p)return;
- $('orderProduct').value=p.name+' - '+money(p.price);
+
+ $('orderProduct').value =
+ p.name+' - '+money(p.price);
+
  $('orderStatus').textContent='';
  $('orderModal').classList.add('show');
 };
 
 $('orderForm').addEventListener('submit',async e=>{
  e.preventDefault();
- const p=$('orderProduct').value;
- const btn=e.submitter;
- btn.disabled=true;
+
+ const btn = e.submitter;
+ btn.disabled = true;
+
  $('orderStatus').textContent='Submitting...';
+
  try{
+
   await addDoc(collection(db,'orders'),{
-   product:p,
+   product:$('orderProduct').value,
    customerName:$('customerName').value.trim(),
    contact:$('customerContact').value.trim(),
    note:$('customerNote').value.trim(),
    status:'Pending',
    createdAt:serverTimestamp()
   });
-  $('orderStatus').textContent='Order submitted successfully!';
+
+  $('orderStatus').textContent =
+  'Order submitted successfully!';
+
   $('orderForm').reset();
+
  }catch(err){
-  $('orderStatus').textContent='Could not submit order. Please try again.';
+
+  $('orderStatus').textContent =
+  'Could not submit order. Please try again.';
+
   console.error(err);
- }finally{btn.disabled=false;}
+
+ }finally{
+  btn.disabled = false;
+ }
 });
 
-window.openAdmin=()=> $('adminModal').classList.add('show');
-window.closeModal=id=>$(id).classList.remove('show');
+/* MODALS */
 
-window.adminLogin=async()=>{
+window.openAdmin = ()=>
+ $('adminModal').classList.add('show');
+
+window.closeModal = id=>
+ $(id).classList.remove('show');
+
+/* ADMIN LOGIN */
+
+window.adminLogin = async()=>{
  $('adminStatus').textContent='Checking login...';
+
  try{
-  await signInWithEmailAndPassword(auth,$('adminEmail').value,$('adminPassword').value);
+
+  await signInWithEmailAndPassword(
+   auth,
+   $('adminEmail').value.trim(),
+   $('adminPassword').value
+  );
+
  }catch(e){
-  $('adminStatus').textContent='Login failed: '+e.message;
+
+  $('adminStatus').textContent =
+  'Login failed: '+e.message;
+
  }
 };
 
+/* CHECK ADMIN */
+
 onAuthStateChanged(auth,async user=>{
- isAdmin=false;
+
+ isAdmin = false;
+
  if(user){
   try{
-   const adminDoc=await getDoc(doc(db,'admins',user.uid));
-   isAdmin=adminDoc.exists();
-  }catch(e){console.error(e);}
+
+   const adminDoc = await getDoc(
+    doc(db,'admins',user.uid)
+   );
+
+   isAdmin = adminDoc.exists();
+
+  }catch(e){
+   console.error(e);
+  }
  }
- $('loginArea').style.display=isAdmin?'none':'block';
- $('adminArea').style.display=isAdmin?'block':'none';
- if(user&&!isAdmin) $('adminStatus').textContent='This account is not authorized as an admin.';
+
+ $('loginArea').style.display =
+ isAdmin?'none':'block';
+
+ $('adminArea').style.display =
+ isAdmin?'block':'none';
+
+ if(user&&!isAdmin){
+  $('adminStatus').textContent =
+  'This account is not authorized as an admin.';
+ }
+
  renderProducts();
+
  if(isAdmin)loadProducts();
+
 });
 
-window.adminLogout=async()=>{
+/* LOGOUT */
+
+window.adminLogout = async()=>{
  await signOut(auth);
  $('adminStatus').textContent='Logged out.';
 };
 
-window.saveProduct=async()=>{
- if(!isAdmin)return alert('Admin access required.');
- const id=$('editId').value;
- const data={
+/* SAVE PRODUCT */
+
+window.saveProduct = async()=>{
+
+ if(!isAdmin){
+  return alert('Admin access required.');
+ }
+
+ const id = $('editId').value;
+
+ const data = {
   name:$('pName').value.trim(),
   game:$('pGame').value,
   price:Number($('pPrice').value),
   image:$('pImage').value.trim(),
   description:$('pDesc').value.trim()
  };
- if(!data.name||!Number.isFinite(data.price)||data.price<0)
+
+ if(
+  !data.name ||
+  !Number.isFinite(data.price) ||
+  data.price<0
+ ){
   return alert('Enter a product name and valid price.');
+ }
+
+ if(data.image && !safeUrl(data.image)){
+  return alert('Please enter a valid HTTP or HTTPS image URL.');
+ }
+
  try{
-  if(id)await updateDoc(doc(db,'products',id),data);
-  else await addDoc(collection(db,'products'),data);
+
+  if(id){
+   await updateDoc(doc(db,'products',id),data);
+  }else{
+   await addDoc(collection(db,'products'),data);
+  }
+
   $('editId').value='';
-  ['pName','pPrice','pImage','pDesc'].forEach(id=>$(id).value='');
+
+  ['pName','pPrice','pImage','pDesc']
+  .forEach(id=>$(id).value='');
+
   $('adminStatus').textContent='Product saved!';
+
   await loadProducts();
- }catch(e){$('adminStatus').textContent='Save failed: '+e.message;}
+
+ }catch(e){
+
+  $('adminStatus').textContent =
+  'Save failed: '+e.message;
+
+ }
 };
 
-window.editProduct=id=>{
+/* EDIT PRODUCT */
+
+window.editProduct = id=>{
+
  if(!isAdmin)return;
- const p=products.find(x=>x.id===id);
+
+ const p = products.find(x=>x.id===id);
  if(!p)return;
+
  $('editId').value=id;
  $('pName').value=p.name||'';
  $('pGame').value=p.game||'MLBB';
  $('pPrice').value=p.price||0;
  $('pImage').value=p.image||'';
  $('pDesc').value=p.description||'';
+
+ $('adminStatus').textContent='Editing product...';
+
 };
+
+/* ADMIN PRODUCT LIST */
 
 function renderAdminProducts(){
+
  if(!isAdmin)return;
- $('adminProducts').innerHTML=products.map(p=>`
- <div style="padding:10px;border-bottom:1px solid #444;font-size:12px">
-  ${escapeHTML(p.name)} — ${money(p.price)}
-  <button class="outline-btn" onclick="deleteProduct('${p.id}')">DELETE</button>
- </div>`).join('');
+
+ $('adminProducts').innerHTML = products.map(p=>`
+ <div class="admin-item">
+
+  <b>${escapeHTML(p.name)}</b> — ${money(p.price)}
+
+  <br>
+
+  <button class="outline-btn"
+   onclick="editProduct('${p.id}')">EDIT</button>
+
+  <button class="outline-btn"
+   onclick="deleteProduct('${p.id}')">DELETE</button>
+
+ </div>
+ `).join('');
+
 }
 
-window.deleteProduct=async id=>{
+/* DELETE PRODUCT */
+
+window.deleteProduct = async id=>{
+
  if(!isAdmin||!confirm('Delete this product?'))return;
+
  try{
+
   await deleteDoc(doc(db,'products',id));
+
   await loadProducts();
- }catch(e){alert('Delete failed: '+e.message);}
+
+ }catch(e){
+
+  alert('Delete failed: '+e.message);
+
+ }
+
 };
 
-window.showOrders=async()=>{
+/* CUSTOMER ORDERS */
+
+window.showOrders = async()=>{
+
  if(!isAdmin)return;
+
  $('ordersList').innerHTML='Loading orders...';
+
  try{
-  const snap=await getDocs(query(collection(db,'orders'),orderBy('createdAt','desc')));
-  if(!snap.size){$('ordersList').innerHTML='No orders yet.';return;}
-  $('ordersList').innerHTML='<h3 style="color:#f5d58a;margin:15px 0">CUSTOMER ORDERS</h3>'+
+
+  const snap = await getDocs(
+   query(
+    collection(db,'orders'),
+    orderBy('createdAt','desc')
+   )
+  );
+
+  if(!snap.size){
+   $('ordersList').innerHTML='No orders yet.';
+   return;
+  }
+
+  $('ordersList').innerHTML =
+  '<h3 style="color:#f5d58a;margin:15px 0">CUSTOMER ORDERS</h3>' +
+
   snap.docs.map(d=>{
-   const o=d.data();
-   return `<div style="padding:12px;border:1px solid #444;margin-bottom:8px;font-size:12px">
+
+   const o = d.data();
+
+   return `
+   <div class="admin-item">
+
     <b>${escapeHTML(o.product)}</b><br>
+
     Name: ${escapeHTML(o.customerName)}<br>
+
     Contact: ${escapeHTML(o.contact)}<br>
+
     Note: ${escapeHTML(o.note||'None')}<br>
+
     Status: ${escapeHTML(o.status||'Pending')}
-   </div>`;
+
+   </div>
+   `;
+
   }).join('');
- }catch(e){$('ordersList').textContent='Could not load orders: '+e.message;}
+
+ }catch(e){
+
+  $('ordersList').textContent =
+  'Could not load orders: '+e.message;
+
+ }
+
 };
 
-window.contactStore=()=>{
+/* CONTACT */
+
+window.contactStore = ()=>{
  window.open('https://t.me/KIFYCASS','_blank');
 };
 
+/* START */
+
 loadProducts();
+
 </script>
 </body>
 </html>
