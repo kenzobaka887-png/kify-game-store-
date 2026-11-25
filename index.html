@@ -1,702 +1,2146 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="my" class="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KIFY GAME STORE</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KIFY GAME STORE — DIGITAL ARMORY</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome 6 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Google Fonts: Padauk, Plus Jakarta Sans, Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Padauk:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        armory: {
+                            bg: '#060a10',
+                            surface: '#0c121d',
+                            card: '#0f1726',
+                            cardHover: '#131d30',
+                            border: '#1c2a42',
+                            borderBright: '#2a436b',
+                            neon: '#3b82f6',
+                            neonBright: '#60a5fa',
+                            cyan: '#38bdf8'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Padauk', 'sans-serif'],
+                        display: ['Montserrat', 'Padauk', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
 
-:root{
- --bg:#090909;
- --card:#151515;
- --gold:#d8ad55;
- --gold2:#f5d58a;
- --white:#fff;
- --muted:#999;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{
- background:var(--bg);
- color:white;
- font-family:Inter,Arial,sans-serif;
-}
-button{cursor:pointer;font-family:inherit}
-header{
- position:sticky;top:0;z-index:10;
- background:#090909ee;
- border-bottom:1px solid #302719;
- padding:15px 5%;
- display:flex;justify-content:space-between;
- align-items:center;backdrop-filter:blur(12px);
-}
-.logo{font-size:21px;font-weight:900;color:var(--gold2)}
-.logo span{color:white}
-nav{display:flex;gap:20px;align-items:center}
-nav a{color:#ddd;text-decoration:none;font-size:12px}
-.gold-btn{
- background:linear-gradient(135deg,#f5d58a,#b88732);
- border:0;color:#17100a;padding:12px 18px;
- border-radius:8px;font-weight:800;
-}
-.outline-btn{
- background:transparent;border:1px solid var(--gold);
- color:var(--gold2);padding:10px 15px;border-radius:8px;
-}
-.hero{
- padding:75px 6% 65px;text-align:center;
- background:radial-gradient(ellipse at top,#49371955,transparent 65%);
-}
-.tag{color:var(--gold);font-size:11px;letter-spacing:4px;font-weight:800}
-.hero h1{font-size:clamp(35px,7vw,68px);font-weight:900;margin:20px 0}
-.hero h1 span{color:var(--gold2)}
-.hero p{color:#aaa;line-height:1.8;max-width:550px;margin:auto;font-size:14px}
-.hero-actions{display:flex;justify-content:center;gap:12px;margin-top:27px}
-.section{padding:35px 5% 65px;max-width:1250px;margin:auto}
-.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:25px}
-.section h2{font-size:24px}
-.section h2 span{color:var(--gold)}
-.search{
- width:100%;padding:13px;background:#151515;
- border:1px solid #333;color:white;border-radius:8px;
- margin-bottom:18px;outline:none;
-}
-.filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:20px}
-.filter{
- padding:9px 15px;border:1px solid #333;
- border-radius:30px;color:#ccc;background:#151515;font-size:11px;
-}
-.filter.active{background:var(--gold);color:#17100a;border-color:var(--gold);font-weight:800}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:17px}
-.product{background:var(--card);border:1px solid #29251e;border-radius:12px;overflow:hidden}
-.product img{width:100%;height:165px;object-fit:cover;background:#222}
-.product-info{padding:15px}
-.category{font-size:10px;color:var(--gold);font-weight:800;letter-spacing:1px}
-.product h3{font-size:15px;margin:8px 0}
-.desc{font-size:12px;color:#999;line-height:1.6;min-height:35px;white-space:pre-wrap}
-.price{color:var(--gold2);font-size:20px;font-weight:900;margin:13px 0}
-.product-actions{display:flex;gap:8px}
-.product-actions button{flex:1;font-size:11px}
-.empty{text-align:center;color:#888;padding:40px}
-.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:15px}
-.feature{padding:23px;background:#141414;border:1px solid #29251e;border-radius:12px}
-.feature b{color:var(--gold2);display:block;margin-bottom:9px}
-.feature p{font-size:12px;color:#999;line-height:1.7}
-footer{text-align:center;padding:35px 15px;border-top:1px solid #302719;color:#888;font-size:12px}
-footer b{color:var(--gold2)}
-.modal{
- display:none;position:fixed;inset:0;background:#000d;
- z-index:30;justify-content:center;align-items:center;padding:15px;
-}
-.modal.show{display:flex}
-.modal-box{
- background:#171717;border:1px solid #70562e;
- border-radius:14px;width:100%;max-width:440px;
- padding:23px;max-height:90vh;overflow:auto;
-}
-.modal-box h2{color:var(--gold2);margin-bottom:17px;font-size:21px}
-.field{margin-bottom:13px}
-.field label{display:block;color:#bbb;font-size:12px;margin-bottom:7px}
-.field input,.field textarea,.field select{
- width:100%;padding:12px;background:#090909;
- border:1px solid #383838;border-radius:7px;
- color:white;outline:none;font-family:inherit;
-}
-.field textarea{min-height:70px;resize:vertical}
-.full{width:100%;margin-top:8px}
-.close{float:right;background:none;border:0;color:white;font-size:23px}
-.admin-area{display:none;margin-top:22px;padding-top:18px;border-top:1px solid #444}
-.admin-area h3{color:var(--gold2);margin-bottom:15px}
-.admin-actions{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}
-.admin-actions button{font-size:10px}
-.status{font-size:12px;color:#aaa;margin-top:10px;line-height:1.6}
-.admin-item{padding:12px;border-bottom:1px solid #444;font-size:12px}
-.admin-item button{margin:5px 3px}
-@media(max-width:600px){
- nav a{display:none}
- header{padding:13px 4%}
- .hero{padding:55px 5%}
- .section{padding:28px 4% 45px}
- .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
- .product img{height:125px}
- .product-info{padding:10px}
- .product h3{font-size:13px}
- .price{font-size:16px}
- .product-actions{flex-direction:column}
- .product-actions button{padding:10px}
-}
-</style>
+    <style>
+        :root {
+            color-scheme: dark;
+        }
+
+        body {
+            background-color: #060a10;
+            background-image:
+                radial-gradient(ellipse 80% 50% at 50% -10%, rgba(37, 99, 235, 0.22), transparent 70%),
+                radial-gradient(ellipse 60% 40% at 85% 25%, rgba(14, 165, 233, 0.12), transparent 65%);
+            color: #f1f5f9;
+            font-family: 'Plus Jakarta Sans', 'Padauk', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .glass-header {
+            background: rgba(8, 13, 22, 0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .neon-blue-btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            box-shadow: 0 0 18px rgba(37, 99, 235, 0.35);
+            transition: all 0.2s ease;
+        }
+        .neon-blue-btn:hover {
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+            box-shadow: 0 0 24px rgba(59, 130, 246, 0.55);
+        }
+
+        .pubg-gold-btn {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            box-shadow: 0 0 18px rgba(245, 158, 11, 0.32);
+            transition: all 0.2s ease;
+        }
+        .pubg-gold-btn:hover {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            box-shadow: 0 0 24px rgba(251, 191, 36, 0.5);
+        }
+
+        .armory-card {
+            background: linear-gradient(180deg, rgba(16, 25, 42, 0.92) 0%, rgba(10, 16, 28, 0.96) 100%);
+            border: 1px solid rgba(36, 54, 84, 0.85);
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .armory-card:hover {
+            border-color: rgba(59, 130, 246, 0.55);
+            box-shadow: 0 10px 30px rgba(2, 6, 23, 0.75), 0 0 18px rgba(37, 99, 235, 0.14);
+        }
+
+        .pubg-standalone-frame {
+            background: linear-gradient(145deg, rgba(24, 21, 13, 0.95) 0%, rgba(12, 18, 30, 0.96) 55%, rgba(9, 15, 27, 0.98) 100%);
+            border: 1.5px solid rgba(245, 158, 11, 0.45);
+            box-shadow: 0 12px 34px rgba(2, 6, 23, 0.8), 0 0 22px rgba(245, 158, 11, 0.12);
+        }
+
+        .account-banner-art {
+            background:
+                linear-gradient(125deg, rgba(9, 18, 34, 0.95) 0%, rgba(14, 30, 56, 0.88) 55%, rgba(8, 15, 29, 0.97) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .account-banner-art::after {
+            content: "";
+            position: absolute;
+            top: -30%;
+            right: -8%;
+            width: 44%;
+            height: 165%;
+            background: linear-gradient(180deg, rgba(59, 130, 246, 0.18), rgba(15, 23, 42, 0.05));
+            transform: skewX(-18deg);
+            pointer-events: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #070c14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e3a8a;
+            border-radius: 9999px;
+        }
+    </style>
 </head>
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-blue-500 selection:text-white">
 
-<body>
+    <!-- 1. STICKY HEADER -->
+    <header class="sticky top-0 z-40 glass-header border-b border-armory-border">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-3.5 pb-3 space-y-3">
+            <!-- Top Row: Brand Logo + @KIFYCASS Pill + Admin Preview Button -->
+            <div class="flex items-center justify-between gap-2.5">
+                <button type="button" onclick="navigateTo('hub')" class="flex items-center gap-3 text-left group cursor-pointer">
+                    <div class="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-blue-400 shadow-inner group-hover:border-blue-400 transition-colors flex-shrink-0">
+                        <i class="fa-solid fa-bolt text-base"></i>
+                    </div>
+                    <div class="leading-tight">
+                        <div class="text-sm sm:text-base font-extrabold tracking-wide text-white uppercase font-display">
+                            KIFY GAME STORE
+                        </div>
+                        <div class="text-[10px] font-bold tracking-[0.18em] text-slate-400 uppercase">
+                            DIGITAL ARMORY
+                        </div>
+                    </div>
+                </button>
 
-<header>
- <div class="logo">KIFY <span>GAME STORE</span></div>
- <nav>
-  <a href="#home">HOME</a>
-  <a href="#products">PRODUCTS</a>
-  <a href="#about">ABOUT</a>
-  <button class="outline-btn" onclick="openAdmin()">ADMIN</button>
- </nav>
-</header>
+                <div class="flex items-center gap-2">
+                    <a href="https://t.me/KIFYCASS" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#0d1c33] hover:bg-[#13294a] border border-blue-500/35 text-sky-400 text-xs font-bold transition-all whitespace-nowrap">
+                        <i class="fa-brands fa-telegram text-sm text-sky-400"></i>
+                        <span>@KIFYCASS</span>
+                    </a>
 
-<section class="hero" id="home">
- <div class="tag">PREMIUM GAMING MARKETPLACE</div>
- <h1>YOUR GAME.<br><span>YOUR LEGEND.</span></h1>
- <p>Welcome to KIFY GAME STORE. Discover your favorite MLBB and PUBG game accounts at great prices.</p>
- <div class="hero-actions">
-  <button class="gold-btn" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">EXPLORE STORE</button>
-  <button class="outline-btn" onclick="contactStore()">CONTACT US</button>
- </div>
-</section>
+                    <button type="button" onclick="openAdminPreview('mlbb')"
+                        class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl neon-blue-btn text-white text-xs font-bold cursor-pointer whitespace-nowrap">
+                        <i class="fa-solid fa-sliders text-xs"></i>
+                        <span>Admin Preview</span>
+                    </button>
+                </div>
+            </div>
 
-<section class="section" id="products">
- <div class="section-head">
-  <h2>OUR <span>PRODUCTS</span></h2>
-  <span class="tag">GAME ACCOUNTS</span>
- </div>
+            <!-- Navigation Tabs Row: Hub, Accounts, PUBG Mobile, Dia Top-Up, TG & Stars -->
+            <nav aria-label="Primary Navigation" class="flex items-center gap-1.5 overflow-x-auto pb-0.5">
+                <button type="button" id="nav-hub" onclick="navigateTo('hub')"
+                    class="nav-tab px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer">
+                    Hub
+                </button>
+                <button type="button" id="nav-accounts" onclick="navigateTo('accounts')"
+                    class="nav-tab px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer">
 
- <input class="search" id="search" placeholder="Search game accounts..." oninput="renderProducts()">
+MLBB Accounts
+                </button>
+                <button type="button" id="nav-pubg" onclick="navigateTo('pubg')"
+                    class="nav-tab px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer">
+                    PUBG Mobile
+                </button>
+                <button type="button" id="nav-dia" onclick="navigateTo('dia')"
+                    class="nav-tab px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer">
+                    Dia Top-Up
+                </button>
+                <button type="button" id="nav-tg" onclick="navigateTo('tg')"
+                    class="nav-tab px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer">
+                    TG &amp; Stars
+                </button>
+            </nav>
+        </div>
+    </header>
 
- <div class="filters">
-  <button class="filter active" onclick="setFilter('ALL',this)">ALL</button>
-  <button class="filter" onclick="setFilter('MLBB',this)">MOBILE LEGENDS</button>
-  <button class="filter" onclick="setFilter('PUBG',this)">PUBG MOBILE</button>
- </div>
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
 
- <div class="grid" id="productsGrid">
-  <div class="empty">Loading products...</div>
- </div>
-</section>
+        <!-- 2. HUB VIEW -->
+        <section id="view-hub" class="space-y-6">
+            <!-- Hero Card -->
+            <div class="rounded-3xl bg-gradient-to-br from-[#0e1b30] via-[#0b1322] to-[#080d17] border border-armory-border p-6 sm:p-8 shadow-2xl space-y-5">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0d192e] border border-blue-500/30 text-[11px] font-bold tracking-wider text-sky-300 uppercase">
+                    <i class="fa-solid fa-shield-halved text-blue-400 text-xs"></i>
+                    <span>KIFY GAME STORE • @KIFYCASS</span>
+                </div>
 
-<section class="section" id="about">
- <div class="section-head"><h2>WHY <span>KIFY STORE?</span></h2></div>
- <div class="features">
-  <div class="feature"><b>✦ Premium Accounts</b><p>Browse game accounts with detailed descriptions and images.</p></div>
-  <div class="feature"><b>✦ Easy Ordering</b><p>Submit your order directly through our website.</p></div>
-  <div class="feature"><b>✦ Customer Support</b><p>Contact our store for help with your order.</p></div>
- </div>
-</section>
+                <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white font-display uppercase leading-none">
+                    KIFY GAME <span class="text-blue-500">STORE</span>
+                </h1>
 
-<footer>
- <b>KIFY GAME STORE</b><br><br>
- Premium Gaming Marketplace<br><br>
- © 2026 KIFY GAME STORE. All Rights Reserved.
-</footer>
+                <p class="text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
+                    Mobile Legends အကောင့်များ Diamond Telegram star နှင့် Premium များကို
+                    <a href="https://t.me/KIFYCASS" target="_blank" rel="noopener noreferrer" class="text-sky-400 font-bold hover:underline">@KIFYCASS</a>
+                    telegram ဆက်သွယ်ပြီးဝယ်ယူနိုင်ပါသည်
+                </p>
 
-<!-- ORDER MODAL -->
-<div class="modal" id="orderModal">
- <div class="modal-box">
-  <button class="close" onclick="closeModal('orderModal')">×</button>
-  <h2>PLACE YOUR ORDER</h2>
-  <form id="orderForm">
-   <div class="field"><label>Product</label><input id="orderProduct" readonly></div>
-   <div class="field"><label>Your Name</label><input id="customerName" required maxlength="80" placeholder="Enter your name"></div>
-   <div class="field"><label>Telegram Username / Contact</label><input id="customerContact" required maxlength="100" placeholder="@username"></div>
-   <div class="field"><label>Additional Details</label><textarea id="customerNote" maxlength="500" placeholder="Your message (optional)"></textarea></div>
-   <button class="gold-btn full" type="submit">SUBMIT ORDER</button>
-   <p class="status" id="orderStatus"></p>
-  </form>
- </div>
-</div>
+                <div class="flex flex-wrap items-center gap-3 pt-1">
+                    <button type="button" onclick="navigateTo('accounts')"
+                        class="inline-flex items-center gap-2 px-5 py-3 rounded-xl neon-blue-btn text-white text-xs sm:text-sm font-extrabold cursor-pointer">
+                        <span>Mobile Legend အကောင့်များ</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
 
-<!-- ADMIN MODAL -->
-<div class="modal" id="adminModal">
- <div class="modal-box">
-  <button class="close" onclick="closeModal('adminModal')">×</button>
-  <h2>ADMIN PANEL</h2>
+                    <a href="https://t.me/KIFYCASS" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#0d1626] hover:bg-[#13223b] border border-armory-borderBright text-slate-100 text-xs sm:text-sm font-bold transition-all">
+                        <i class="fa-brands fa-telegram text-sky-400 text-base"></i>
+                        <span>Telegram မှ ဆက်သွယ်ရန်</span>
+                    </a>
+                </div>
+            </div>
 
-  <div id="loginArea">
-   <div class="field"><label>Admin Email</label><input type="email" id="adminEmail"></div>
-   <div class="field"><label>Password</label><input type="password" id="adminPassword"></div>
-   <button class="gold-btn full" onclick="adminLogin()">LOGIN</button>
-  </div>
+            <!-- DEDICATED STANDALONE PUBG MOBILE FRAME -->
+            <div class="pubg-standalone-frame rounded-3xl p-5 sm:p-7">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+                        <div class="w-full sm:w-44 h-28 rounded-2xl overflow-hidden border border-amber-500/40 bg-[#090f1b] flex-shrink-0 relative">
+                            <img id="hubPubgCoverPreview" src="" alt="PUBG အကောင့်ဈေးနှုန်းများ" class="hidden w-full h-full object-cover" />
+                            <div id="hubPubgCoverFallback" class="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-amber-500/20 via-[#10192b] to-[#080d17] p-3 text-center">
+                                <i class="fa-solid fa-crosshairs text-2xl text-amber-400 mb-1"></i>
+                                <span class="text-[10px] font-extrabold tracking-widest text-amber-300 uppercase">PUBG MOBILE</span>
+                            </div>
+                        </div>
 
-  <div class="admin-area" id="adminArea">
-   <h3>ADD / EDIT PRODUCT</h3>
-   <input type="hidden" id="editId">
+                        <div>
+                            <h2 class="text-xl sm:text-2xl font-extrabold text-white">
+                                PUBG အကောင့်ဈေးနှုန်းများ
+                            </h2>
+                        </div>
+                    </div>
 
-   <div class="field"><label>Product Name</label><input id="pName" placeholder="MLBB Account"></div>
+                    <div class="flex flex-wrap items-center gap-2.5 flex-shrink-0">
+                        <button type="button" onclick="navigateTo('pubg')"
+                            class="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl pubg-gold-btn text-slate-950 text-xs sm:text-sm font-black cursor-pointer">
+                            <i class="fa-solid fa-crosshairs"></i>
+                            <span>Pubg Mobile အကောင့်များကြည့်ရန်</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-   <div class="field"><label>Game</label>
-    <select id="pGame">
-     <option>MLBB</option>
-     <option>PUBG</option>
-    </select>
-   </div>
+            <!-- 3 Feature Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <!-- Feature Card 1: Mobile Legend Accounts -->
+                <div onclick="navigateTo('accounts')"
+                    class="armory-card rounded-3xl p-6 flex flex-col justify-between gap-6 cursor-pointer group">
+                    <div class="space-y-3">
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-white leading-snug group-hover:text-blue-300 transition-colors">
+                            Mobile Legend အကောင့်များ
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                            Explore curated MLBB accounts, filter by Available or Sold Out status, sort by price, inspect photo slides, and order via @KIFYCASS.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between text-xs font-bold text-blue-400 group-hover:text-blue-300 pt-2">
+                        <span>Browse Accounts</span>
+                        <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+                    </div>
+                </div>
 
-   <div class="field"><label>Price (MMK)</label><input type="number" id="pPrice" min="0"></div>
-   <div class="field"><label>Image URL</label><input id="pImage" placeholder="https://..."></div>
-   <div class="field"><label>Description</label><textarea id="pDesc"></textarea></div>
+                <!-- Feature Card 2: MLBB Diamond Prices -->
+                <div onclick="navigateTo('dia')"
+                    class="armory-card rounded-3xl p-6 flex flex-col justify-between gap-6 cursor-pointer group">
+                    <div class="space-y-3">
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-white leading-snug group-hover:text-blue-300 transition-colors">
+                            MLBB Diamond ဈေးနှုန်းများ
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                            View Weekly Pass, Weekly Elite Bundle, Monthly Epic Bundle, and 86 to 9,288 Diamond packages with instant @KIFYCASS order links.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between text-xs font-bold text-blue-400 group-hover:text-blue-300 pt-2">
+                        <span>View Dia Prices</span>
+                        <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+                    </div>
+                </div>
 
-   <button class="gold-btn full" onclick="saveProduct()">SAVE PRODUCT</button>
+                <!-- Feature Card 3: Star & TG Premium Prices -->
+                <div onclick="navigateTo('tg')"
+                    class="armory-card rounded-3xl p-6 flex flex-col justify-between gap-6 cursor-pointer group">
 
-   <div class="admin-actions">
-    <button class="outline-btn" onclick="loadProducts()">REFRESH</button>
-    <button class="outline-btn" onclick="showOrders()">VIEW ORDERS</button>
-    <button class="outline-btn" onclick="adminLogout()">LOGOUT</button>
-   </div>
+<div class="space-y-3">
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-white leading-snug group-hover:text-blue-300 transition-colors">
+                            Star နှင့် TG Premium ဈေးနှုန်းများ
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                            Check Telegram Premium gift plans (3 Months, 6 Months, 1 Year) and Telegram Star packages (50 to 1,000 Stars) via @KIFYCASS.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between text-xs font-bold text-blue-400 group-hover:text-blue-300 pt-2">
+                        <span>View TG &amp; Stars</span>
+                        <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-   <div id="adminProducts"></div>
-   <div id="ordersList"></div>
-  </div>
+        <!-- 3. MLBB ACCOUNTS VIEW -->
+        <section id="view-accounts" class="hidden space-y-5">
+            <div id="mlbbCustomBannerWrap" class="hidden rounded-3xl overflow-hidden border border-armory-border h-44 sm:h-56 bg-[#090f1b]">
+                <img id="mlbbCustomBannerImg" src="" alt="MLBB Banner" class="w-full h-full object-cover" />
+            </div>
 
-  <p class="status" id="adminStatus"></p>
- </div>
-</div>
+            <div class="rounded-2xl bg-armory-surface border border-armory-border p-4 sm:p-5 space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                        <div class="text-[11px] font-bold tracking-widest text-blue-400 uppercase">
+                            MLBB ACCOUNT VAULT • @KIFYCASS
+                        </div>
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-white mt-0.5">
+                            Mobile Legend အကောင့်များ
+                        </h2>
+                    </div>
 
-<script type="module">
+                    <div class="flex flex-wrap items-center gap-2 self-start sm:self-auto">
+                        <button type="button" onclick="navigateTo('hub')"
+                            class="px-3 py-2 rounded-xl bg-armory-card hover:bg-armory-cardHover border border-armory-border text-xs font-bold text-slate-300 hover:text-white cursor-pointer transition-colors">
+                            <i class="fa-solid fa-arrow-left mr-1"></i> Hub
+                        </button>
+                        <button type="button" onclick="navigateTo('pubg')"
+                            class="px-3 py-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/40 text-amber-300 text-xs font-bold cursor-pointer transition-colors">
+                            <i class="fa-solid fa-crosshairs mr-1"></i> Pubg Mobile အကောင့်များကြည့်ရန်
+                        </button>
+                        <button type="button" onclick="openAdminPreview('mlbb')"
+                            class="px-3.5 py-2 rounded-xl neon-blue-btn text-white text-xs font-bold cursor-pointer">
+                            <i class="fa-solid fa-sliders mr-1"></i> Edit / Add MLBB
+                        </button>
+                    </div>
+                </div>
 
-import { initializeApp }
- from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+                    <div class="md:col-span-6 relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                        <input type="text" id="accountSearchInput" oninput="renderAccountsView()"
+                            placeholder="Search code (KIFY-104), rank, skin, or hero..."
+                            class="w-full bg-[#080d16] border border-armory-border focus:border-blue-500 rounded-xl pl-9 pr-3.5 py-2 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none" />
+                    </div>
 
-import {
- getAuth, signInWithEmailAndPassword,
- onAuthStateChanged, signOut
-} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+                    <div class="md:col-span-3">
+                        <select id="accountStatusFilter" onchange="renderAccountsView()"
+                            class="w-full bg-[#080d16] border border-armory-border focus:border-blue-500 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none">
+                            <option value="ALL">All Status (All)</option>
+                            <option value="AVAILABLE">Available Only</option>
+                            <option value="SOLD">Sold Out Only</option>
+                        </select>
+                    </div>
 
-import {
- getFirestore, collection, addDoc, getDocs,
- getDoc, doc, updateDoc, deleteDoc,
- query, orderBy, serverTimestamp
-} from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+                    <div class="md:col-span-3">
+                        <select id="accountSortSelect" onchange="renderAccountsView()"
+                            class="w-full bg-[#080d16] border border-armory-border focus:border-blue-500 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none">
+                            <option value="newest">Newest</option>
+                            <option value="price-asc">Price: Low to High</option>
+                            <option value="price-desc">Price: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
 
-/* NEW FIREBASE CONFIG */
+            <div id="accountsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
 
-const firebaseConfig = {
- apiKey: "AIzaSyCtacW6YbCwIWjPZ-jfNdheo1qcpJr3Yxs",
- authDomain: "kify-game-store-c71e5.firebaseapp.com",
- projectId: "kify-game-store-c71e5",
- storageBucket: "kify-game-store-c71e5.firebasestorage.app",
- messagingSenderId: "383451116516",
- appId: "1:383451116516:web:3c16738b3bc3b3508d0df1",
- measurementId: "G-BD3W0XZ1DT"
-};
+            <div id="accountsEmptyState" class="hidden rounded-2xl bg-armory-surface border border-armory-border p-10 text-center space-y-3">
+                <div class="w-12 h-12 mx-auto rounded-full bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
+                    <i class="fa-solid fa-gamepad text-lg"></i>
+                </div>
+                <p class="text-sm font-bold text-white">No matching MLBB accounts found</p>
+                <p class="text-xs text-slate-400">Try clearing your search or status filter.</p>
+                <button type="button" onclick="resetAccountFilters()"
+                    class="px-4 py-2 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/40 text-blue-300 text-xs font-bold cursor-pointer">
+                    Reset Filters
+                </button>
+            </div>
+        </section>
 
-/* INITIALIZE */
+        <!-- 3B. DEDICATED STANDALONE PUBG MOBILE ACCOUNTS VIEW -->
+        <section id="view-pubg" class="hidden space-y-5">
+            <div class="pubg-standalone-frame rounded-3xl p-4 sm:p-6 space-y-5">
+                <div id="pubgCustomBannerWrap" class="hidden rounded-2xl overflow-hidden border border-amber-500/40 h-44 sm:h-56 bg-[#090f1b]">
+                    <img id="pubgCustomBannerImg" src="" alt="PUBG အကောင့်ဈေးနှုန်းများ" class="w-full h-full object-cover" />
+                </div>
+
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-amber-500/20 pb-4">
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-white">
+                            PUBG အကောင့်ဈေးနှုန်းများ
+                        </h2>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2 self-start sm:self-auto">
+                        <button type="button" onclick="navigateTo('hub')"
+                            class="px-3 py-2 rounded-xl bg-[#0b1322] hover:bg-[#121f36] border border-armory-border text-xs font-bold text-slate-300 hover:text-white cursor-pointer transition-colors">
+                            <i class="fa-solid fa-arrow-left mr-1"></i> Hub
+                        </button>
+                        <button type="button" onclick="navigateTo('accounts')"
+                            class="px-3 py-2 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/40 text-blue-300 text-xs font-bold cursor-pointer transition-colors">
+                            <i class="fa-solid fa-gamepad mr-1"></i> MLBB အကောင့်များ
+                        </button>
+                        <button type="button" onclick="openAdminPreview('pubg')"
+
+class="px-3.5 py-2 rounded-xl pubg-gold-btn text-slate-950 text-xs font-extrabold cursor-pointer">
+                            <i class="fa-solid fa-sliders mr-1"></i> Edit / Add PUBG
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+                    <div class="md:col-span-6 relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-amber-400/80 text-xs"></i>
+                        <input type="text" id="pubgSearchInput" oninput="renderPubgView()"
+                            placeholder="Search PUBG code (PUBG-101), tier, gun skin, outfit..."
+                            class="w-full bg-[#080d16] border border-amber-500/30 focus:border-amber-400 rounded-xl pl-9 pr-3.5 py-2 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none" />
+                    </div>
+
+                    <div class="md:col-span-3">
+                        <select id="pubgStatusFilter" onchange="renderPubgView()"
+                            class="w-full bg-[#080d16] border border-amber-500/30 focus:border-amber-400 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none">
+                            <option value="ALL">All Status (All)</option>
+                            <option value="AVAILABLE">Available Only</option>
+                            <option value="SOLD">Sold Out Only</option>
+                        </select>
+                    </div>
+
+                    <div class="md:col-span-3">
+                        <select id="pubgSortSelect" onchange="renderPubgView()"
+                            class="w-full bg-[#080d16] border border-amber-500/30 focus:border-amber-400 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none">
+                            <option value="newest">Newest</option>
+                            <option value="price-asc">Price: Low to High</option>
+                            <option value="price-desc">Price: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="pubgGrid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+
+                <div id="pubgEmptyState" class="hidden rounded-2xl bg-[#090f1b] border border-amber-500/30 p-10 text-center space-y-3">
+                    <div class="w-12 h-12 mx-auto rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
+                        <i class="fa-solid fa-crosshairs text-lg"></i>
+                    </div>
+                    <p class="text-sm font-bold text-white">No matching PUBG Mobile accounts found</p>
+                    <p class="text-xs text-slate-400">Try clearing your search or status filter.</p>
+                    <button type="button" onclick="resetPubgFilters()"
+                        class="px-4 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/40 text-amber-300 text-xs font-bold cursor-pointer">
+                        Reset Filters
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. DIA TOP-UP VIEW -->
+        <section id="view-dia" class="hidden space-y-5">
+            <div class="rounded-3xl bg-gradient-to-br from-[#0e1b30] via-[#0b1322] to-[#080d17] border border-armory-border p-5 sm:p-7 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <div class="text-[10px] sm:text-[11px] font-extrabold tracking-[0.18em] text-blue-400 uppercase">
+                        DIAMOND &amp; PASS ARMORY
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">
+                        MLBB Diamond ဈေးနှုန်းများ
+                    </h2>
+                </div>
+
+                <button type="button" onclick="navigateTo('hub')"
+                    class="self-start sm:self-center inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0b1320] hover:bg-[#121f36] border border-armory-borderBright text-xs font-bold text-slate-200 cursor-pointer transition-all">
+                    <i class="fa-solid fa-arrow-left text-xs"></i>
+                    <span>Back to Hub</span>
+                </button>
+            </div>
+
+            <div id="diaBundlesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+
+            <div class="rounded-3xl bg-armory-surface border border-armory-border p-4 sm:p-6 space-y-4">
+                <div class="flex items-center justify-between px-1">
+                    <h3 class="text-sm sm:text-base font-extrabold text-white">Diamond Packages</h3>
+                    <span class="text-xs font-bold text-blue-400">ks</span>
+                </div>
+
+                <div id="diaPackagesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+            </div>
+        </section>
+
+        <!-- 5. TG & STARS VIEW -->
+        <section id="view-tg" class="hidden space-y-5">
+            <div class="rounded-3xl bg-gradient-to-br from-[#0e1b30] via-[#0b1322] to-[#080d17] border border-armory-border p-5 sm:p-7 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <div class="text-[10px] sm:text-[11px] font-extrabold tracking-[0.18em] text-blue-400 uppercase">
+                        TELEGRAM STAR &amp; GIFT PREMIUM
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">
+                        Star နှင့် TG Premium ဈေးနှုန်းများ
+                    </h2>
+                </div>
+
+                <button type="button" onclick="navigateTo('hub')"
+                    class="self-start sm:self-center inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0b1320] hover:bg-[#121f36] border border-armory-borderBright text-xs font-bold text-slate-200 cursor-pointer transition-all">
+                    <i class="fa-solid fa-arrow-left text-xs"></i>
+                    <span>Back to Hub</span>
+                </button>
+            </div>
+
+            <div class="rounded-3xl bg-armory-surface border border-armory-border p-4 sm:p-6 space-y-4">
+                <div class="flex items-center justify-between px-1">
+                    <h3 class="text-sm sm:text-base font-extrabold text-white">Telegram Premium Gift Plans</h3>
+                    <span class="text-xs font-bold text-blue-400">ks</span>
+                </div>
+
+                <div id="tgPremiumGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
+            </div>
+
+            <div class="rounded-3xl bg-armory-surface border border-armory-border p-4 sm:p-6 space-y-4">
+                <div class="flex items-center justify-between px-1">
+                    <h3 class="text-sm sm:text-base font-extrabold text-white">Telegram Star Packages</h3>
+                    <span class="text-xs font-bold text-blue-400">ks</span>
+                </div>
+
+                <div id="tgStarsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 7. FOOTER -->
+    <footer class="border-t border-armory-border bg-[#070b12] py-5 mt-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
+            <div class="font-bold tracking-wider uppercase text-slate-300">
+                KIFY GAME STORE
+            </div>
+
+            <a href="https://t.me/KIFYCASS" target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 text-sky-400 hover:text-sky-300 font-bold transition-colors">
+                <i class="fa-brands fa-telegram text-sm"></i>
+                <span>Telegram @KIFYCASS</span>
+            </a>
+
+            <div class="text-slate-500">
+                &copy; 2026 KIFY GAME STORE
+            </div>
+        </div>
+    </footer>
+
+<!-- ACCOUNT DETAILS MODAL WITH MULTI-IMAGE GALLERY & SLIDE SWITCHER -->
+    <div id="accountDetailModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto">
+        <div class="relative w-full max-w-2xl rounded-3xl bg-armory-surface border border-armory-borderBright shadow-2xl overflow-hidden my-8">
+            <button type="button" onclick="closeModal('accountDetailModal')"
+                class="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-black/65 hover:bg-blue-600 text-slate-200 hover:text-white border border-white/15 flex items-center justify-center cursor-pointer transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div id="accountDetailContent" class="p-5 sm:p-7 space-y-5"></div>
+        </div>
+    </div>
+
+    <!-- 6. INTERACTIVE ADMIN PREVIEW MODAL -->
+    <div id="adminPreviewModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm overflow-y-auto">
+        <div class="relative w-full max-w-5xl rounded-3xl bg-armory-surface border border-blue-500/40 shadow-2xl overflow-hidden my-8">
+            <div class="flex items-center justify-between px-5 sm:px-6 py-4 bg-[#080d16] border-b border-armory-border">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-8 h-8 rounded-lg bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-blue-400">
+                        <i class="fa-solid fa-sliders text-xs"></i>
+                    </span>
+                    <div>
+                        <h3 class="text-sm sm:text-base font-extrabold text-white">Admin Preview Control</h3>
+                        <p class="text-[11px] text-slate-400">Edit prices, images, status, and accounts for Mobile Legends &amp; PUBG Mobile</p>
+                    </div>
+                </div>
+
+                <button type="button" onclick="closeModal('adminPreviewModal')"
+                    class="w-8 h-8 rounded-lg bg-armory-card hover:bg-red-500/20 text-slate-300 hover:text-red-400 border border-armory-border flex items-center justify-center cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="p-5 sm:p-6 space-y-5">
+                <div class="flex flex-wrap items-center justify-between gap-2 border-b border-armory-border pb-3.5">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button type="button" id="admTab-mlbb" onclick="switchAdminSubTab('mlbb')"
+                            class="adm-subtab px-3.5 py-2 rounded-xl text-xs font-bold cursor-pointer">
+                            MLBB Accounts &amp; Images
+                        </button>
+                        <button type="button" id="admTab-pubg" onclick="switchAdminSubTab('pubg')"
+                            class="adm-subtab px-3.5 py-2 rounded-xl text-xs font-bold cursor-pointer">
+                            PUBG Mobile &amp; Images
+                        </button>
+                        <button type="button" id="admTab-dia" onclick="switchAdminSubTab('dia')"
+                            class="adm-subtab px-3.5 py-2 rounded-xl text-xs font-bold cursor-pointer">
+                            Edit Dia Prices
+                        </button>
+                        <button type="button" id="admTab-tg" onclick="switchAdminSubTab('tg')"
+                            class="adm-subtab px-3.5 py-2 rounded-xl text-xs font-bold cursor-pointer">
+                            Edit TG &amp; Stars
+                        </button>
+                    </div>
+
+                    <button type="button" onclick="resetAllPreviewData()"
+                        class="px-3 py-1.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 text-xs font-bold cursor-pointer">
+                        <i class="fa-solid fa-rotate-left mr-1"></i> Reset Defaults
+                    </button>
+                </div>
+
+                <div id="admPane-accountsShared" class="space-y-5">
+                    <div class="rounded-2xl bg-[#090e18] border border-armory-border p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="space-y-1">
+                            <div id="admBannerLabel" class="text-xs font-extrabold text-blue-400">
+                                MLBB Frame Banner Image
+                            </div>
+                            <p class="text-[11px] text-slate-400">
+                                Upload or replace the frame banner image displayed at the top of the section/card.
+                            </p>
+                        </div>
+
+                        <div class="flex items-center gap-2.5 flex-wrap">
+                            <label class="cursor-pointer px-3.5 py-2 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/40 text-blue-300 text-xs font-bold inline-flex items-center gap-1.5">
+                                <i class="fa-solid fa-image"></i>
+                                <span>Upload Banner</span>
+                                <input type="file" id="admFrameBannerInput" accept="image/*" onchange="handleFrameBannerUpload(event)" class="hidden" />
+                            </label>
+                            <button type="button" onclick="clearFrameBanner()"
+                                class="px-3 py-2 rounded-xl bg-armory-card hover:bg-red-500/15 border border-armory-border text-slate-300 hover:text-red-300 text-xs font-bold cursor-pointer">
+                                Clear Banner
+                            </button>
+                        </div>
+                    </div>
+
+                    <form onsubmit="saveAccountFromAdmin(event)" class="rounded-2xl bg-[#090e18] border border-armory-border p-4 space-y-3.5">
+                        <div class="flex items-center justify-between">
+                            <h4 id="admAccFormTitle" class="text-xs sm:text-sm font-extrabold text-blue-400">
+                                Add New Account
+                            </h4>
+                            <button type="button" id="admCancelEditBtn" onclick="clearAdminAccountForm()"
+                                class="hidden text-xs text-slate-400 hover:text-white underline cursor-pointer">
+                                Cancel Edit
+                            </button>
+                        </div>
+
+                        <input type="hidden" id="admEditAccId" />
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                            <div>
+                                <label class="block text-[11px] text-slate-400 mb-1">Account Code *</label>
+                                <input type="text" id="admAccCode" required placeholder="KIFY-505 or PUBG-205"
+                                    class="w-full bg-armory-card border border-armory-border focus:border-blue-500 rounded-xl px-3 py-2 text-xs text-white focus:outline-none" />
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label class="block text-[11px] text-slate-400 mb-1">Account Title *</label>
+                                <input type="text" id="admAccTitle" required placeholder="Account title..."
+                                    class="w-full bg-armory-card border border-armory-border focus:border-blue-500 rounded-xl px-3 py-2 text-xs text-white focus:outline-none" />
+                            </div>
+                            <div>
+                                <label id="admRankLabel" class="block text-[11px] text-slate-400 mb-1">Rank / Tier Badge *</label>
+                                <input type="text" id="admAccRank" required placeholder="High Rank 135★ or Conqueror"
+
+class="w-full bg-armory-card border border-armory-border focus:border-blue-500 rounded-xl px-3 py-2 text-xs text-white focus:outline-none" />
+                            </div>
+                            <div>
+                                <label class="block text-[11px] text-slate-400 mb-1">Price (MMK) *</label>
+                                <input type="number" id="admAccPrice" required min="0" placeholder="240000"
+                                    class="w-full bg-armory-card border border-armory-border focus:border-blue-500 rounded-xl px-3 py-2 text-xs text-white focus:outline-none" />
+                            </div>
+                            <div>
+                                <label class="block text-[11px] text-slate-400 mb-1">Status</label>
+                                <select id="admAccStatus"
+                                    class="w-full bg-armory-card border border-armory-border focus:border-blue-500 rounded-xl px-3 py-2 text-xs text-white focus:outline-none">
+                                    <option value="AVAILABLE">AVAILABLE</option>
+                                    <option value="SOLD">SOLD</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label id="admStat1Label" class="block text-[11px] text-slate-400 mb-1">Skins / Outfits *</label>
+                                <input type="number" id="admAccSkins" required min="0" placeholder="320"
+                                    class="w-full bg-armory-card border border-armory-border focus:border-blue-500 rounded-xl px-3 py-2 text-xs text-white focus:outline-none" />
+                            </div>
+                            <div>
+                                <label id="admStat2Label" class="block text-[11px] text-slate-400 mb-1">Heroes / Gun Skins *</label>
+                                <input type="number" id="admAccHeroes" required min="0" placeholder="125"
+                                    class="w-full bg-armory-card border border-armory-border focus:border-blue-500 rounded-xl px-3 py-2 text-xs text-white focus:outline-none" />
+                            </div>
+                            <div>
+                                <label id="admStat3Label" class="block text-[11px] text-slate-400 mb-1">Win Rate / RP</label>
+                                <input type="text" id="admAccWinrate" placeholder="67.5% or RP Max"
+                                    class="w-full bg-armory-card border border-armory-border focus:border-blue-500 rounded-xl px-3 py-2 text-xs text-white focus:outline-none" />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] text-slate-400 mb-1">Highlights (comma-separated)</label>
+                            <input type="text" id="admAccHighlights" placeholder="Collector / M416 Glacier / X-Suit..."
+                                class="w-full bg-armory-card border border-armory-border focus:border-blue-500 rounded-xl px-3 py-2 text-xs text-white focus:outline-none" />
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] text-slate-400 mb-1">Notes / Details</label>
+                            <textarea id="admAccNotes" rows="2" placeholder="Clean bind details, order via @KIFYCASS."
+                                class="w-full bg-armory-card border border-armory-border focus:border-blue-500 rounded-xl px-3 py-2 text-xs text-white focus:outline-none"></textarea>
+                        </div>
+
+                        <div class="space-y-2 border-t border-armory-border pt-3">
+                            <div class="flex flex-wrap items-center justify-between gap-2">
+                                <label class="text-xs font-bold text-sky-400">
+                                    Account Photos / Images (Upload multiple, remove or reorder)
+                                </label>
+                                <label class="cursor-pointer px-3 py-1.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/40 text-blue-300 text-xs font-bold inline-flex items-center gap-1.5">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                                    <span>Add Photos</span>
+                                    <input type="file" id="admAccImagesInput" accept="image/*" multiple onchange="handleAdminAccountImagesUpload(event)" class="hidden" />
+                                </label>
+                            </div>
+
+                            <div id="admAccountImagesPreview" class="flex flex-wrap gap-2.5 min-h-[56px] p-2.5 rounded-xl bg-armory-card border border-armory-border">
+                                <span class="text-xs text-slate-500 self-center mx-auto">No custom photos uploaded yet (default slide card will be shown).</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-2.5 pt-1">
+                            <button type="submit" class="px-4 py-2 rounded-xl neon-blue-btn text-white text-xs font-extrabold cursor-pointer">
+                                <i class="fa-solid fa-floppy-disk mr-1"></i> Save Account
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="space-y-2 max-h-64 overflow-y-auto pr-1" id="admAccountsList"></div>
+                </div>
+
+                <div id="admPane-dia" class="hidden space-y-4">
+                    <div class="flex items-center justify-between">
+                        <p class="text-xs text-slate-300 font-semibold">Edit MLBB Passes &amp; Diamond Package prices (ks)</p>
+                        <button type="button" onclick="saveDiaFromAdmin()"
+                            class="px-4 py-2 rounded-xl neon-blue-btn text-white text-xs font-extrabold cursor-pointer">
+                            <i class="fa-solid fa-check mr-1"></i> Save Dia Prices
+                        </button>
+                    </div>
+                    <div id="admDiaEditorList" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-80 overflow-y-auto pr-1"></div>
+                </div>
+
+                <div id="admPane-tg" class="hidden space-y-4">
+                    <div class="flex items-center justify-between">
+                        <p class="text-xs text-slate-300 font-semibold">Edit Telegram Premium &amp; Star prices (ks)</p>
+                        <button type="button" onclick="saveTgFromAdmin()"
+                            class="px-4 py-2 rounded-xl neon-blue-btn text-white text-xs font-extrabold cursor-pointer">
+                            <i class="fa-solid fa-check mr-1"></i> Save TG Prices
+                        </button>
+                    </div>
+                    <div id="admTgEditorList" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-80 overflow-y-auto pr-1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div id="toastBox" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCtacW6YbCwIWjPZ-jfNdheo1qcpJr3Yxs",
+            authDomain: "kify-game-store-c71e5.firebaseapp.com",
+            projectId: "kify-game-store-c71e5",
+            storageBucket: "kify-game-store-c71e5.firebasestorage.app",
+            messagingSenderId: "383451116516",
+            appId: "1:383451116516:web:5d3669a92e31901c8d0df1",
+            measurementId: "G-6PHFJVG0HS"
+        };
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-let products = [];
-let filter = 'ALL';
-let isAdmin = false;
-
-const $ = id => document.getElementById(id);
-
-const money = n =>
- Number(n || 0).toLocaleString('en-US') + ' MMK';
-
-function escapeHTML(s=''){
- return String(s).replace(/[&<>"']/g,c=>({
-  '&':'&amp;',
-  '<':'&lt;',
-  '>':'&gt;',
-  '"':'&quot;',
-  "'":'&#39;'
- }[c]));
-}
-
-function safeUrl(url=''){
- try{
-  const u = new URL(url);
-  return ['https:','http:'].includes(u.protocol)
-   ? escapeHTML(url) : '';
- }catch{
-  return '';
- }
-}
-
-/* FILTER */
-
-window.setFilter = (value,btn)=>{
- filter = value;
-
- document.querySelectorAll('.filter')
- .forEach(b=>b.classList.remove('active'));
-
- btn.classList.add('active');
- renderProducts();
-};
-
-/* PRODUCT DISPLAY */
-
-window.renderProducts = ()=>{
- const search = $('search').value.toLowerCase();
-
- const list = products.filter(p=>
-  (filter==='ALL'||p.game===filter) &&
-  (
-   (p.name||'').toLowerCase().includes(search) ||
-   (p.description||'').toLowerCase().includes(search)
-  )
- );
-
- $('productsGrid').innerHTML = list.length
- ? list.map(p=>`
- <article class="product">
-
-  <img src="${safeUrl(p.image)}"
-   alt="Game account"
-   onerror="this.src='https://placehold.co/500x300/171717/d8ad55?text=KIFY+GAME+STORE'">
-
-  <div class="product-info">
-
-   <div class="category">${escapeHTML(p.game||'GAME')}</div>
-
-   <h3>${escapeHTML(p.name)}</h3>
-
-   <div class="desc">${escapeHTML(p.description||'Premium game account')}</div>
-
-   <div class="price">${money(p.price)}</div>
-
-   <div class="product-actions">
-
-    <button class="gold-btn" onclick="orderProduct('${p.id}')">ORDER NOW</button>
-
-    ${isAdmin?`<button class="outline-btn" onclick="editProduct('${p.id}')">EDIT</button>`:''}
-
-   </div>
-  </div>
- </article>
- `).join('')
- : '<div class="empty">No products available yet.</div>';
-};
-
-/* LOAD PRODUCTS */
-
-async function loadProducts(){
- try{
-  const snap = await getDocs(collection(db,'products'));
-
-  products = snap.docs.map(d=>({
-   id:d.id,
-   ...d.data()
-  }));
-
-  renderProducts();
-  renderAdminProducts();
-
- }catch(e){
-  $('productsGrid').innerHTML =
-  '<div class="empty">Unable to load products. Check Firestore Rules.</div>';
-
-  console.error(e);
- }
-}
-
-window.loadProducts = loadProducts;
-
-/* ORDER SYSTEM */
-
-window.orderProduct = id=>{
- const p = products.find(x=>x.id===id);
- if(!p)return;
-
- $('orderProduct').value =
- p.name+' - '+money(p.price);
-
- $('orderStatus').textContent='';
- $('orderModal').classList.add('show');
-};
-
-$('orderForm').addEventListener('submit',async e=>{
- e.preventDefault();
-
- const btn = e.submitter;
- btn.disabled = true;
-
- $('orderStatus').textContent='Submitting...';
-
- try{
-
-  await addDoc(collection(db,'orders'),{
-   product:$('orderProduct').value,
-   customerName:$('customerName').value.trim(),
-   contact:$('customerContact').value.trim(),
-   note:$('customerNote').value.trim(),
-   status:'Pending',
-   createdAt:serverTimestamp()
-  });
-
-  $('orderStatus').textContent =
-  'Order submitted successfully!';
-
-  $('orderForm').reset();
-
- }catch(err){
-
-  $('orderStatus').textContent =
-  'Could not submit order. Please try again.';
-
-  console.error(err);
-
- }finally{
-  btn.disabled = false;
- }
-});
-
-/* MODALS */
-
-window.openAdmin = ()=>
- $('adminModal').classList.add('show');
-
-window.closeModal = id=>
- $(id).classList.remove('show');
-
-/* ADMIN LOGIN */
-
-window.adminLogin = async()=>{
- $('adminStatus').textContent='Checking login...';
-
- try{
-
-  await signInWithEmailAndPassword(
-   auth,
-   $('adminEmail').value.trim(),
-   $('adminPassword').value
-  );
-
- }catch(e){
-
-  $('adminStatus').textContent =
-  'Login failed: '+e.message;
-
- }
-};
-
-/* CHECK ADMIN */
-
-onAuthStateChanged(auth,async user=>{
-
- isAdmin = false;
-
- if(user){
-  try{
-
-   const adminDoc = await getDoc(
-    doc(db,'admins',user.uid)
-   );
-
-   isAdmin = adminDoc.exists();
-
-  }catch(e){
-   console.error(e);
-  }
- }
-
- $('loginArea').style.display =
- isAdmin?'none':'block';
-
- $('adminArea').style.display =
- isAdmin?'block':'none';
-
- if(user&&!isAdmin){
-  $('adminStatus').textContent =
-  'This account is not authorized as an admin.';
- }
-
- renderProducts();
-
- if(isAdmin)loadProducts();
-
-});
-
-/* LOGOUT */
-
-window.adminLogout = async()=>{
- await signOut(auth);
- $('adminStatus').textContent='Logged out.';
-};
-
-/* SAVE PRODUCT */
-
-window.saveProduct = async()=>{
-
- if(!isAdmin){
-  return alert('Admin access required.');
- }
-
- const id = $('editId').value;
-
- const data = {
-  name:$('pName').value.trim(),
-  game:$('pGame').value,
-  price:Number($('pPrice').value),
-  image:$('pImage').value.trim(),
-  description:$('pDesc').value.trim()
- };
-
- if(
-  !data.name ||
-  !Number.isFinite(data.price) ||
-  data.price<0
- ){
-  return alert('Enter a product name and valid price.');
- }
-
- if(data.image && !safeUrl(data.image)){
-  return alert('Please enter a valid HTTP or HTTPS image URL.');
- }
-
- try{
-
-  if(id){
-   await updateDoc(doc(db,'products',id),data);
-  }else{
-   await addDoc(collection(db,'products'),data);
-  }
-
-  $('editId').value='';
-
-  ['pName','pPrice','pImage','pDesc']
-  .forEach(id=>$(id).value='');
-
-  $('adminStatus').textContent='Product saved!';
-
-  await loadProducts();
-
- }catch(e){
-
-  $('adminStatus').textContent =
-  'Save failed: '+e.message;
-
- }
-};
-
-/* EDIT PRODUCT */
-
-window.editProduct = id=>{
-
- if(!isAdmin)return;
-
- const p = products.find(x=>x.id===id);
- if(!p)return;
-
- $('editId').value=id;
- $('pName').value=p.name||'';
- $('pGame').value=p.game||'MLBB';
- $('pPrice').value=p.price||0;
- $('pImage').value=p.image||'';
- $('pDesc').value=p.description||'';
-
- $('adminStatus').textContent='Editing product...';
-
-};
-
-/* ADMIN PRODUCT LIST */
-
-function renderAdminProducts(){
-
- if(!isAdmin)return;
-
- $('adminProducts').innerHTML = products.map(p=>`
- <div class="admin-item">
-
-  <b>${escapeHTML(p.name)}</b> — ${money(p.price)}
-
-  <br>
-
-  <button class="outline-btn"
-   onclick="editProduct('${p.id}')">EDIT</button>
-
-  <button class="outline-btn"
-   onclick="deleteProduct('${p.id}')">DELETE</button>
-
- </div>
- `).join('');
-
-}
-
-/* DELETE PRODUCT */
-
-window.deleteProduct = async id=>{
-
- if(!isAdmin||!confirm('Delete this product?'))return;
-
- try{
-
-  await deleteDoc(doc(db,'products',id));
-
-  await loadProducts();
-
- }catch(e){
-
-  alert('Delete failed: '+e.message);
-
- }
-
-};
-
-/* CUSTOMER ORDERS */
-
-window.showOrders = async()=>{
-
- if(!isAdmin)return;
-
- $('ordersList').innerHTML='Loading orders...';
-
- try{
-
-  const snap = await getDocs(
-   query(
-    collection(db,'orders'),
-    orderBy('createdAt','desc')
-   )
-  );
-
-  if(!snap.size){
-   $('ordersList').innerHTML='No orders yet.';
-   return;
-  }
-
-  $('ordersList').innerHTML =
-  '<h3 style="color:#f5d58a;margin:15px 0">CUSTOMER ORDERS</h3>' +
-
-  snap.docs.map(d=>{
-
-   const o = d.data();
-
-   return `
-   <div class="admin-item">
-
-    <b>${escapeHTML(o.product)}</b><br>
-
-    Name: ${escapeHTML(o.customerName)}<br>
-
-    Contact: ${escapeHTML(o.contact)}<br>
-
-    Note: ${escapeHTML(o.note||'None')}<br>
-
-    Status: ${escapeHTML(o.status||'Pending')}
-
-   </div>
-   `;
-
-  }).join('');
-
- }catch(e){
-
-  $('ordersList').textContent =
-  'Could not load orders: '+e.message;
-
- }
-
-};
-
-/* CONTACT */
-
-window.contactStore = ()=>{
- window.open('https://t.me/KIFYCASS','_blank');
-};
-
-/* START */
-
-loadProducts();
-
-</script>
+        try { getAnalytics(app); } catch (_) {}
+        const db = getFirestore(app);
+        const STORE_DOC_REF = doc(db, "kify_store", "main");
+
+        const TELEGRAM_HANDLE = 'KIFYCASS';
+        const STORAGE_KEYS = {
+            mlbb: 'kify_armory_mlbb_v2',
+            pubg: 'kify_armory_pubg_v2',
+            dia: 'kify_armory_dia_v2',
+            tg: 'kify_armory_tg_v2',
+            banners: 'kify_armory_banners_v2'
+        };
+
+        const DEFAULT_MLBB_ACCOUNTS = [
+            {
+                id: 'mlbb-104',
+                code: 'KIFY-104',
+                title: 'KIFY-104 Obsidian Vanguard High Rank',
+                rankBadge: 'High Rank 142★',
+                status: 'AVAILABLE',
+                skins: 368,
+                heroes: 125,
+                winrate: '69.2%',
+                price: 295000,
+                highlights: ['Gusion Collector', 'Beatrix Prime', 'Chou KOF'],
+                notes: 'Moonton clean account with full unbind support. Order directly via @KIFYCASS.',
+                images: [],
+                slides: [
+                    { label: 'SLIDE 1', sub: 'High Rank 142★ • 368 Skins', hl: 'Gusion Collector • Beatrix Prime' },
+                    { label: 'SLIDE 2', sub: '125 Heroes • 69.2% WR', hl: 'Chou KOF • Full Emblem Ready' },
+                    { label: 'SLIDE 3', sub: 'Clean Bind Guarantee', hl: 'Fast Transfer • @KIFYCASS' }
+                ],
+                createdAt: 400
+            },
+            {
+                id: 'mlbb-208',
+                code: 'KIFY-208',
+                title: 'KIFY-208 Cobalt Phantom Legend Set',
+                rankBadge: 'High Rank 96★',
+                status: 'AVAILABLE',
+                skins: 274,
+                heroes: 121,
+                winrate: '65.8%',
+                price: 210000,
+                highlights: ['Granger Legend', 'Kagura Exorcist', 'Ling Dragon'],
+                notes: 'High rank lineup with Legend and Exorcist showcase. Contact @KIFYCASS to reserve.',
+                images: [],
+                slides: [
+                    { label: 'SLIDE 1', sub: 'High Rank 96★ • 274 Skins', hl: 'Granger Legend • Kagura Exorcist' },
+                    { label: 'SLIDE 2', sub: '121 Heroes • 65.8% WR', hl: 'Ling Dragon • VIP Showcase' }
+                ],
+                createdAt: 300
+            },
+            {
+                id: 'mlbb-312',
+                code: 'KIFY-312',
+                title: 'KIFY-312 Steel Striker Lineup',
+                rankBadge: 'High Rank 118★',
+                status: 'AVAILABLE',
+                skins: 312,
+                heroes: 123,
+                winrate: '66.9%',
+                price: 245000,
+                highlights: ['Fanny Skylark', 'Lunox Legend', 'Wanwan Collector'],
+                notes: 'Core/Assassin & Mage high-tier collection ready for immediate handover via @KIFYCASS.',
+                images: [],
+                slides: [
+                    { label: 'SLIDE 1', sub: 'High Rank 118★ • 312 Skins', hl: 'Fanny Skylark • Lunox Legend' },
+                    { label: 'SLIDE 2', sub: '123 Heroes • 66.9% WR', hl: 'Wanwan Collector • Smooth Bind' }
+                ],
+                createdAt: 200
+            },
+            {
+                id: 'mlbb-419',
+                code: 'KIFY-419',
+                title: 'KIFY-419 Carbon Mythic',
+                rankBadge: 'Mythic 42★',
+                status: 'SOLD',
+                skins: 148,
+                heroes: 112,
+                winrate: '60.4%',
+                price: 95000,
+                highlights: ['Valentina Collector', 'Moskov Allstar'],
+                notes: 'Sold out listing. Check other Available accounts or message @KIFYCASS for similar stock.',
+                images: [],
+                slides: [
+                    { label: 'SLIDE 1', sub: 'Mythic 42★ • 148 Skins', hl: 'Valentina Collector • Moskov Allstar' },
+                    { label: 'SLIDE 2', sub: '112 Heroes • 60.4% WR', hl: 'Sold Out Archive • @KIFYCASS' }
+                ],
+                createdAt: 100
+            }
+        ];
+
+        const DEFAULT_PUBG_ACCOUNTS = [
+            {
+                id: 'pubg-101',
+                code: 'PUBG-101',
+                title: 'PUBG-101 Glacier M416 & X-Suit Vault',
+                rankBadge: 'Conqueror Frame',
+                status: 'AVAILABLE',
+                skins: 195,
+                heroes: 42,
+                winrate: 'RP Max',
+                price: 320000,
+                highlights: ['M416 Glacier Lv.5', 'Pharaoh X-Suit', 'Fool M416'],
+                notes: 'Clean social/email bind ready for transfer. Message @KIFYCASS for full inventory video/photos.',
+                images: [],
+                slides: [
+                    { label: 'SLIDE 1', sub: 'Conqueror Frame • 195 Outfits', hl: 'M416 Glacier Lv.5 • Pharaoh X-Suit' },
+                    { label: 'SLIDE 2', sub: '42 Upgradeable Guns • RP Max', hl: 'Fool M416 • Instant Handover @KIFYCASS' }
+                ],
+                createdAt: 300
+            },
+            {
+                id: 'pubg-102',
+                code: 'PUBG-102',
+                title: 'PUBG-102 Ace Dominator Mythic Set',
+                rankBadge: 'Ace Dominator',
+                status: 'AVAILABLE',
+                skins: 134,
+                heroes: 24,
+                winrate: 'RP 100',
+                price: 165000,
+                highlights: ['Mythic Fashion', 'AKM Glacier', 'Companion Set'],
+                notes: 'Solid mid-high tier PUBG Mobile account with smooth handover via @KIFYCASS.',
+                images: [],
+                slides: [
+                    { label: 'SLIDE 1', sub: 'Ace Dominator • 134 Outfits', hl: 'Mythic Fashion • AKM Glacier' },
+                    { label: 'SLIDE 2', sub: '24 Gun Skins • RP 100', hl: 'Safe Deal • @KIFYCASS' }
+                ],
+                createdAt: 200
+            },
+            {
+                id: 'pubg-103',
+                code: 'PUBG-103',
+                title: 'PUBG-103 Royale Pass Collector',
+                rankBadge: 'Crown II',
+                status: 'SOLD',
+                skins: 88,
+                heroes: 14,
+                winrate: 'RP 100',
+                price: 78000,
+                highlights: ['RP Outfits', 'Uzi Upgrade'],
+                notes: 'Sold out listing. Contact @KIFYCASS if you are looking for similar PUBG Mobile accounts.',
+                images: [],
+                slides: [
+                    { label: 'SLIDE 1', sub: 'Crown II • 88 Outfits', hl: 'RP Outfits • Uzi Upgrade' }
+                ],
+                createdAt: 100
+            }
+        ];
+
+        const DEFAULT_DIA = {
+            bundles: [
+                { id: 'wp', name: 'Weekly Pass', price: 9000 },
+                { id: 'web', name: 'Weekly Elite Bundle', price: 5000 },
+                { id: 'meb', name: 'Monthly Epic Bundle', price: 22100 }
+            ],
+            packages: [
+                { id: 'd86', amount: '86', price: 6500 },
+                { id: 'd172', amount: '172', price: 16000 },
+                { id: 'd257', amount: '257', price: 20300 },
+                { id: 'd343', amount: '343', price: 26800 },
+                { id: 'd429', amount: '429', price: 36300 },
+                { id: 'd514', amount: '514', price: 40600 },
+                { id: 'd600', amount: '600', price: 47100 },
+                { id: 'd706', amount: '706', price: 51000 },
+                { id: 'd878', amount: '878', price: 67000 },
+                { id: 'd963', amount: '963', price: 71300 },
+                { id: 'd1049', amount: '1049', price: 77800 },
+                { id: 'd1135', amount: '1135', price: 87300 },
+                { id: 'd1220', amount: '1220', price: 91600 },
+                { id: 'd1412', amount: '1412', price: 102000 },
+                { id: 'd2195', amount: '2195', price: 151300 },
+                { id: 'd3688', amount: '3688', price: 256000 },
+                { id: 'd5532', amount: '5532', price: 386000 },
+                { id: 'd9288', amount: '9288', price: 631200 }
+            ]
+        };
+
+const DEFAULT_TG = {
+            premium: [
+                { id: 'tgp3', name: '3 Months (Gift Plan)', price: 62000 },
+                { id: 'tgp6', name: '6 Months (Gift Plan)', price: 84000 },
+                { id: 'tgp12', name: '1 Year (Gift Plan)', price: 146000 }
+            ],
+            stars: [
+                { id: 's50', amount: '50', price: 3800 },
+                { id: 's100', amount: '100', price: 7600 },
+                { id: 's150', amount: '150', price: 11400 },
+                { id: 's200', amount: '200', price: 15200 },
+                { id: 's250', amount: '250', price: 19000 },
+                { id: 's300', amount: '300', price: 22800 },
+                { id: 's500', amount: '500', price: 38000 },
+                { id: 's1000', amount: '1000', price: 76000 }
+            ]
+        };
+
+        const DEFAULT_BANNERS = {
+            mlbb: '',
+            pubg: ''
+        };
+
+        let state = {
+            currentView: 'hub',
+            adminGameMode: 'mlbb',
+            mlbb: [],
+            pubg: [],
+            dia: null,
+            tg: null,
+            banners: null,
+            draftAccountImages: [],
+            modalGame: 'mlbb',
+            modalAccId: null,
+            modalSlideIdx: 0
+        };
+
+        function cloneData(obj) {
+            return JSON.parse(JSON.stringify(obj));
+        }
+
+        function loadFromLocal() {
+            try {
+                const rawMlbb = localStorage.getItem(STORAGE_KEYS.mlbb);
+                state.mlbb = rawMlbb ? JSON.parse(rawMlbb) : cloneData(DEFAULT_MLBB_ACCOUNTS);
+            } catch (_) {
+                state.mlbb = cloneData(DEFAULT_MLBB_ACCOUNTS);
+            }
+
+            try {
+                const rawPubg = localStorage.getItem(STORAGE_KEYS.pubg);
+                state.pubg = rawPubg ? JSON.parse(rawPubg) : cloneData(DEFAULT_PUBG_ACCOUNTS);
+            } catch (_) {
+                state.pubg = cloneData(DEFAULT_PUBG_ACCOUNTS);
+            }
+
+            try {
+                const rawDia = localStorage.getItem(STORAGE_KEYS.dia);
+                state.dia = rawDia ? JSON.parse(rawDia) : cloneData(DEFAULT_DIA);
+            } catch (_) {
+                state.dia = cloneData(DEFAULT_DIA);
+            }
+
+            try {
+                const rawTg = localStorage.getItem(STORAGE_KEYS.tg);
+                state.tg = rawTg ? JSON.parse(rawTg) : cloneData(DEFAULT_TG);
+            } catch (_) {
+                state.tg = cloneData(DEFAULT_TG);
+            }
+
+            try {
+                const rawBanners = localStorage.getItem(STORAGE_KEYS.banners);
+                state.banners = rawBanners ? { ...cloneData(DEFAULT_BANNERS), ...JSON.parse(rawBanners) } : cloneData(DEFAULT_BANNERS);
+            } catch (_) {
+                state.banners = cloneData(DEFAULT_BANNERS);
+            }
+        }
+
+        function writeLocalOnly() {
+            try {
+                localStorage.setItem(STORAGE_KEYS.mlbb, JSON.stringify(state.mlbb));
+                localStorage.setItem(STORAGE_KEYS.pubg, JSON.stringify(state.pubg));
+                localStorage.setItem(STORAGE_KEYS.dia, JSON.stringify(state.dia));
+                localStorage.setItem(STORAGE_KEYS.tg, JSON.stringify(state.tg));
+                localStorage.setItem(STORAGE_KEYS.banners, JSON.stringify(state.banners));
+            } catch (_) {}
+        }
+
+        async function saveToStorage() {
+            writeLocalOnly();
+            try {
+                await setDoc(STORE_DOC_REF, {
+                    mlbb: state.mlbb,
+                    pubg: state.pubg,
+                    dia: state.dia,
+                    tg: state.tg,
+                    banners: state.banners,
+                    updatedAt: Date.now()
+                }, { merge: true });
+            } catch (_) {
+                showToast('Saved locally (check Firestore rules for cloud sync)', 'info');
+            }
+        }
+
+        async function loadFromFirebase() {
+            try {
+                const snap = await getDoc(STORE_DOC_REF);
+                if (snap.exists()) {
+                    const data = snap.data();
+                    if (Array.isArray(data.mlbb)) state.mlbb = data.mlbb;
+                    if (Array.isArray(data.pubg)) state.pubg = data.pubg;
+                    if (data.dia) state.dia = data.dia;
+                    if (data.tg) state.tg = data.tg;
+                    if (data.banners) state.banners = { ...cloneData(DEFAULT_BANNERS), ...data.banners };
+                    writeLocalOnly();
+                    syncBannerUI();
+                    if (state.currentView === 'accounts') renderAccountsView();
+                    if (state.currentView === 'pubg') renderPubgView();
+                    if (state.currentView === 'dia') renderDiaView();
+                    if (state.currentView === 'tg') renderTgView();
+                }
+            } catch (_) {}
+        }
+
+        function formatNum(n) {
+            return Number(n || 0).toLocaleString('en-US');
+        }
+
+        function escapeHtml(str) {
+            return String(str ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function tgOrderUrl(messageText) {
+            return https://t.me/${TELEGRAM_HANDLE}?text=${encodeURIComponent(messageText)};
+        }
+
+        function showToast(msg, type = 'info') {
+            const box = document.getElementById('toastBox');
+            if (!box) return;
+            const el = document.createElement('div');
+            const colorClass = type === 'success'
+                ? 'bg-[#0b1c2c] border-emerald-500/50 text-emerald-300'
+                : type === 'error'
+                ? 'bg-[#240d14] border-red-500/50 text-red-300'
+                : 'bg-[#0d192e] border-blue-500/50 text-blue-200';
+
+            el.className = px-4 py-2.5 rounded-xl border text-xs font-bold shadow-xl pointer-events-auto transition-all ${colorClass};
+            el.textContent = msg;
+            box.appendChild(el);
+            setTimeout(() => el.remove(), 2600);
+        }
+
+        function compressImageFile(file, maxSide = 720, quality = 0.72) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        let w = img.width;
+                        let h = img.height;
+                        if (w > maxSide || h > maxSide) {
+                            if (w > h) {
+                                h = Math.round((h * maxSide) / w);
+                                w = maxSide;
+                            } else {
+                                w = Math.round((w * maxSide) / h);
+                                h = maxSide;
+                            }
+                        }
+                        const canvas = document.createElement('canvas');
+                        canvas.width = w;
+                        canvas.height = h;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, w, h);
+                        resolve(canvas.toDataURL('image/jpeg', quality));
+                    };
+                    img.onerror = () => resolve(ev.target.result);
+                    img.src = ev.target.result;
+                };
+                reader.onerror = () => resolve(null);
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function syncBannerUI() {
+            const pubgImg = document.getElementById('hubPubgCoverPreview');
+            const pubgFallback = document.getElementById('hubPubgCoverFallback');
+            const pubgSecWrap = document.getElementById('pubgCustomBannerWrap');
+            const pubgSecImg = document.getElementById('pubgCustomBannerImg');
+
+if (state.banners && state.banners.pubg) {
+                if (pubgImg) {
+                    pubgImg.src = state.banners.pubg;
+                    pubgImg.classList.remove('hidden');
+                }
+                if (pubgFallback) pubgFallback.classList.add('hidden');
+                if (pubgSecWrap && pubgSecImg) {
+                    pubgSecImg.src = state.banners.pubg;
+                    pubgSecWrap.classList.remove('hidden');
+                }
+            } else {
+                if (pubgImg) {
+                    pubgImg.src = '';
+                    pubgImg.classList.add('hidden');
+                }
+                if (pubgFallback) pubgFallback.classList.remove('hidden');
+                if (pubgSecWrap) pubgSecWrap.classList.add('hidden');
+            }
+
+            const mlbbSecWrap = document.getElementById('mlbbCustomBannerWrap');
+            const mlbbSecImg = document.getElementById('mlbbCustomBannerImg');
+            if (state.banners && state.banners.mlbb && mlbbSecWrap && mlbbSecImg) {
+                mlbbSecImg.src = state.banners.mlbb;
+                mlbbSecWrap.classList.remove('hidden');
+            } else if (mlbbSecWrap) {
+                mlbbSecWrap.classList.add('hidden');
+            }
+        }
+
+        function navigateTo(viewName) {
+            state.currentView = viewName;
+            const views = ['hub', 'accounts', 'pubg', 'dia', 'tg'];
+            views.forEach((v) => {
+                const sec = document.getElementById(view-${v});
+                if (sec) sec.classList.toggle('hidden', v !== viewName);
+
+                const tab = document.getElementById(nav-${v});
+                if (tab) {
+                    if (v === viewName) {
+                        tab.className = 'nav-tab px-3.5 py-1.5 rounded-xl text-xs font-extrabold bg-blue-600 text-white shadow-sm transition-all whitespace-nowrap cursor-pointer';
+                    } else {
+                        tab.className = 'nav-tab px-3.5 py-1.5 rounded-xl text-xs font-bold bg-[#0c1422] hover:bg-[#132036] text-slate-300 hover:text-white border border-armory-border transition-all whitespace-nowrap cursor-pointer';
+                    }
+                }
+            });
+
+            if (viewName === 'accounts') renderAccountsView();
+            if (viewName === 'pubg') renderPubgView();
+            if (viewName === 'dia') renderDiaView();
+            if (viewName === 'tg') renderTgView();
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function buildAccountCardHtml(acc, gameType) {
+            const isSold = acc.status === 'SOLD';
+            const hasPhotos = Array.isArray(acc.images) && acc.images.length > 0;
+            const slides = (acc.slides && acc.slides.length > 0)
+                ? acc.slides
+                : [{ label: 'SLIDE 1', sub: ${acc.rankBadge} • ${acc.skins} Skins, hl: (acc.highlights || []).join(' • ') }];
+            const firstSlide = slides[0];
+            const totalMediaCount = hasPhotos ? acc.images.length : slides.length;
+            const brandTag = gameType === 'pubg' ? 'PUBG MOBILE • @KIFYCASS' : 'KIFY GAME STORE • @KIFYCASS';
+            const badgeAccent = gameType === 'pubg'
+                ? 'bg-amber-500/15 border-amber-400/35 text-amber-300'
+                : 'bg-[#091324]/90 border-blue-400/30 text-blue-300';
+
+            const visualBlock = hasPhotos
+                ? `
+                    <div class="relative h-44 rounded-2xl border border-armory-borderBright/70 overflow-hidden bg-[#080e1a]">
+                        <img src="${acc.images[0]}" alt="${escapeHtml(acc.title)}" class="w-full h-full object-cover" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
+                        <div class="absolute top-3 left-3 flex items-center gap-2">
+                            ${isSold
+                                ? <span class="px-2.5 py-0.5 rounded-full bg-rose-500/25 border border-rose-500/50 text-rose-200 text-[10px] font-extrabold tracking-wider uppercase backdrop-blur-sm">SOLD</span>
+                                : <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/25 border border-emerald-400/50 text-emerald-200 text-[10px] font-extrabold tracking-wider uppercase backdrop-blur-sm">AVAILABLE</span>
+                            }
+                        </div>
+                        <div class="absolute top-3 right-3">
+                            <span class="px-2.5 py-0.5 rounded-full ${badgeAccent} text-[10px] font-bold backdrop-blur-sm">
+                                ${escapeHtml(acc.rankBadge)}
+                            </span>
+                        </div>
+                        <div class="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-[10px] font-extrabold tracking-wider text-slate-200 uppercase">
+                            <span class="truncate">${escapeHtml(acc.code)} • ${escapeHtml(firstSlide.hl || '')}</span>
+                            <span class="px-2 py-0.5 rounded bg-black/70 border border-white/15 flex-shrink-0">${totalMediaCount} ${totalMediaCount > 1 ? 'PHOTOS' : 'PHOTO'}</span>
+                        </div>
+                    </div>
+                `
+                : `
+                    <div class="account-banner-art rounded-2xl border border-armory-borderBright/70 p-4 sm:p-5 min-h-[168px] flex flex-col justify-between">
+                        <div class="relative z-10 flex items-center justify-between gap-2">
+                            ${isSold
+                                ? <span class="px-2.5 py-0.5 rounded-full bg-rose-500/20 border border-rose-500/40 text-rose-300 text-[10px] font-extrabold tracking-wider uppercase">SOLD</span>
+                                : <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-[10px] font-extrabold tracking-wider uppercase">AVAILABLE</span>
+                            }
+
+                            <span class="px-2.5 py-0.5 rounded-full ${badgeAccent} text-[10px] font-bold">
+                                ${escapeHtml(acc.rankBadge)}
+                            </span>
+                        </div>
+
+                        <div class="relative z-10 my-2 space-y-1">
+                            <div class="text-[10px] font-bold tracking-widest text-slate-400 uppercase">
+                                ${gameType === 'pubg' ? 'PUBG MOBILE VAULT' : 'KIFY GAME STORE'} • ${escapeHtml(firstSlide.label)}
+                            </div>
+                            <div class="text-xl sm:text-2xl font-black text-white font-display tracking-tight">
+                                ${escapeHtml(acc.code)}
+                            </div>
+                            <div class="text-xs font-bold text-amber-300">
+                                ${escapeHtml(firstSlide.sub)}
+                            </div>
+                            <div class="text-[11px] text-slate-300 line-clamp-1">
+                                ${escapeHtml(firstSlide.hl)}
+                            </div>
+                        </div>
+
+                        <div class="relative z-10 flex items-center justify-between text-[10px] font-bold tracking-wider text-slate-400 uppercase">
+                            <span>${brandTag}</span>
+                            <span>${totalMediaCount} ${totalMediaCount > 1 ? 'SLIDES' : 'SLIDE'}</span>
+                        </div>
+                    </div>
+                `;
+
+            const stat1Lbl = gameType === 'pubg' ? 'Outfits' : 'Skins';
+            const stat2Lbl = gameType === 'pubg' ? 'Gun Skins' : 'Heroes';
+            const stat3Lbl = gameType === 'pubg' ? 'RP / Tier' : 'Win Rate';
+
+            return `
+                <article class="armory-card rounded-3xl p-4 sm:p-5 flex flex-col justify-between gap-4">
+                    <div class="space-y-4">
+                        <div onclick="openAccountModal('${gameType}', '${escapeHtml(acc.id)}')" class="cursor-pointer">
+                            ${visualBlock}
+                        </div>
+
+<div>
+                            <div class="text-[11px] font-extrabold tracking-wider text-amber-400 uppercase">
+                                ${escapeHtml(acc.code)}
+                            </div>
+                            <h3 class="text-base sm:text-lg font-extrabold text-white mt-0.5 leading-snug">
+                                ${escapeHtml(acc.title)}
+                            </h3>
+                        </div>
+
+                        <div class="grid grid-cols-3 rounded-2xl bg-[#080d16] border border-armory-border divide-x divide-armory-border text-center py-2.5">
+                            <div class="px-2">
+                                <div class="text-[10px] text-slate-400">${stat1Lbl}</div>
+                                <div class="text-sm sm:text-base font-extrabold text-white mt-0.5">${escapeHtml(acc.skins)}</div>
+                            </div>
+                            <div class="px-2">
+                                <div class="text-[10px] text-slate-400">${stat2Lbl}</div>
+                                <div class="text-sm sm:text-base font-extrabold text-white mt-0.5">${escapeHtml(acc.heroes)}</div>
+                            </div>
+                            <div class="px-2">
+                                <div class="text-[10px] text-slate-400">${stat3Lbl}</div>
+                                <div class="text-sm sm:text-base font-extrabold text-emerald-400 mt-0.5">${escapeHtml(acc.winrate || '—')}</div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap gap-1.5">
+                            ${(acc.highlights || []).map((tag) => `
+                                <span class="px-2.5 py-1 rounded-lg bg-[#0b1322] border border-armory-border text-[11px] font-semibold text-slate-200">
+                                    ${escapeHtml(tag)}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div class="pt-3.5 border-t border-armory-border flex items-center justify-between gap-3">
+                        <div>
+                            <div class="text-[10px] text-slate-400">Price</div>
+                            <div class="flex items-baseline gap-1.5">
+                                <span class="text-lg sm:text-xl font-black text-sky-400 font-display">${formatNum(acc.price)}</span>
+                                <span class="text-[11px] font-bold text-slate-400 uppercase">MMK</span>
+                            </div>
+                        </div>
+
+                        <button type="button" onclick="openAccountModal('${gameType}', '${escapeHtml(acc.id)}')"
+                            class="px-4 py-2 rounded-xl ${gameType === 'pubg' ? 'pubg-gold-btn text-slate-950' : 'neon-blue-btn text-white'} text-xs font-extrabold cursor-pointer">
+                            Details
+                        </button>
+                    </div>
+                </article>
+            `;
+        }
+
+        function filterAndSortList(list, q, statusFilter, sortBy) {
+            let out = list.filter((acc) => {
+                if (statusFilter !== 'ALL' && acc.status !== statusFilter) return false;
+                if (!q) return true;
+                const hay = [acc.code, acc.title, acc.rankBadge, ...(acc.highlights || [])].join(' ').toLowerCase();
+                return hay.includes(q);
+            });
+
+            if (sortBy === 'price-asc') {
+                out = [...out].sort((a, b) => Number(a.price) - Number(b.price));
+            } else if (sortBy === 'price-desc') {
+                out = [...out].sort((a, b) => Number(b.price) - Number(a.price));
+            } else {
+                out = [...out].sort((a, b) => Number(b.createdAt  0) - Number(a.createdAt  0));
+            }
+            return out;
+        }
+
+        function renderAccountsView() {
+            const grid = document.getElementById('accountsGrid');
+            const empty = document.getElementById('accountsEmptyState');
+            if (!grid || !empty) return;
+
+            const q = (document.getElementById('accountSearchInput')?.value || '').trim().toLowerCase();
+            const statusFilter = document.getElementById('accountStatusFilter')?.value || 'ALL';
+            const sortBy = document.getElementById('accountSortSelect')?.value || 'newest';
+
+            const list = filterAndSortList(state.mlbb, q, statusFilter, sortBy);
+            if (list.length === 0) {
+                grid.innerHTML = '';
+                empty.classList.remove('hidden');
+                return;
+            }
+            empty.classList.add('hidden');
+            grid.innerHTML = list.map((acc) => buildAccountCardHtml(acc, 'mlbb')).join('');
+        }
+
+        function resetAccountFilters() {
+            document.getElementById('accountSearchInput').value = '';
+            document.getElementById('accountStatusFilter').value = 'ALL';
+            document.getElementById('accountSortSelect').value = 'newest';
+            renderAccountsView();
+        }
+
+        function renderPubgView() {
+            const grid = document.getElementById('pubgGrid');
+            const empty = document.getElementById('pubgEmptyState');
+            if (!grid || !empty) return;
+
+            const q = (document.getElementById('pubgSearchInput')?.value || '').trim().toLowerCase();
+            const statusFilter = document.getElementById('pubgStatusFilter')?.value || 'ALL';
+            const sortBy = document.getElementById('pubgSortSelect')?.value || 'newest';
+
+            const list = filterAndSortList(state.pubg, q, statusFilter, sortBy);
+            if (list.length === 0) {
+                grid.innerHTML = '';
+                empty.classList.remove('hidden');
+                return;
+            }
+            empty.classList.add('hidden');
+            grid.innerHTML = list.map((acc) => buildAccountCardHtml(acc, 'pubg')).join('');
+        }
+
+        function resetPubgFilters() {
+            document.getElementById('pubgSearchInput').value = '';
+            document.getElementById('pubgStatusFilter').value = 'ALL';
+            document.getElementById('pubgSortSelect').value = 'newest';
+            renderPubgView();
+        }
+
+        function openAccountModal(gameType, accId) {
+            const pool = gameType === 'pubg' ? state.pubg : state.mlbb;
+            const acc = pool.find((a) => a.id === accId);
+            if (!acc) return;
+            state.modalGame = gameType;
+            state.modalAccId = accId;
+            state.modalSlideIdx = 0;
+            renderAccountModalContent();
+            document.getElementById('accountDetailModal').classList.remove('hidden');
+        }
+
+        function renderAccountModalContent() {
+            const pool = state.modalGame === 'pubg' ? state.pubg : state.mlbb;
+            const acc = pool.find((a) => a.id === state.modalAccId);
+            const container = document.getElementById('accountDetailContent');
+            if (!acc || !container) return;
+
+            const hasPhotos = Array.isArray(acc.images) && acc.images.length > 0;
+            const slides = (acc.slides && acc.slides.length > 0)
+                ? acc.slides
+                : [{ label: 'SLIDE 1', sub: acc.rankBadge, hl: (acc.highlights || []).join(' • ') }];
+
+            const totalItems = hasPhotos ? acc.images.length : slides.length;
+            const idx = Math.max(0, Math.min(state.modalSlideIdx, totalItems - 1));
+            const currentSlide = slides[idx % slides.length];
+            const isSold = acc.status === 'SOLD';
+            const gameLabel = state.modalGame === 'pubg' ? 'PUBG Mobile' : 'Mobile Legends';
+            const orderMsg = မင်္ဂလာပါ KIFY GAME STORE (@KIFYCASS)၊ ${gameLabel} Account ${acc.code} (${acc.title} • ${formatNum(acc.price)} MMK) ဝယ်ယူလိုပါသည်။;
+
+            const stat1Lbl = state.modalGame === 'pubg' ? 'Outfits' : 'Skins';
+            const stat2Lbl = state.modalGame === 'pubg' ? 'Gun Skins' : 'Heroes';
+            const stat3Lbl = state.modalGame === 'pubg' ? 'RP / Tier' : 'Win Rate';
+
+const stageHtml = hasPhotos
+                ? `
+                    <div class="relative rounded-2xl border border-armory-borderBright overflow-hidden bg-[#070c15] min-h-[210px] sm:min-h-[250px] flex flex-col justify-between">
+                        <img src="${acc.images[idx]}" alt="${escapeHtml(acc.title)}" class="w-full h-60 sm:h-72 object-contain bg-black/50" />
+                        <div class="absolute top-3 left-3 flex items-center gap-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-black/75 border border-white/15 text-[11px] font-extrabold text-sky-300">
+                                PHOTO ${idx + 1} / ${totalItems}
+                            </span>
+                        </div>
+                        <div class="absolute top-3 right-12 flex items-center gap-1.5">
+                            <button type="button" onclick="changeModalSlide(-1)"
+                                class="w-8 h-8 rounded-lg bg-black/75 hover:bg-blue-600 border border-white/15 text-white flex items-center justify-center cursor-pointer">
+                                <i class="fa-solid fa-chevron-left text-xs"></i>
+                            </button>
+                            <button type="button" onclick="changeModalSlide(1)"
+                                class="w-8 h-8 rounded-lg bg-black/75 hover:bg-blue-600 border border-white/15 text-white flex items-center justify-center cursor-pointer">
+                                <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-1.5 p-2.5 bg-[#080d16]/95 border-t border-armory-border overflow-x-auto">
+                            ${acc.images.map((imgSrc, sIdx) => `
+                                <button type="button" onclick="selectModalSlide(${sIdx})"
+                                    class="w-14 h-11 rounded-lg overflow-hidden border-2 flex-shrink-0 cursor-pointer ${sIdx === idx ? 'border-blue-500' : 'border-transparent opacity-60 hover:opacity-100'}">
+                                    <img src="${imgSrc}" alt="Thumb ${sIdx + 1}" class="w-full h-full object-cover" />
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `
+                : `
+                    <div class="account-banner-art rounded-2xl border border-armory-borderBright p-5 sm:p-6 min-h-[190px] flex flex-col justify-between">
+                        <div class="relative z-10 flex items-center justify-between gap-2">
+                            <span class="text-[11px] font-extrabold tracking-widest text-blue-300 uppercase">
+                                ${escapeHtml(currentSlide.label)} (${idx + 1} / ${totalItems})
+                            </span>
+
+                            <div class="flex items-center gap-1.5">
+                                <button type="button" onclick="changeModalSlide(-1)"
+                                    class="w-8 h-8 rounded-lg bg-[#08101e]/90 hover:bg-blue-600 border border-blue-400/30 text-white flex items-center justify-center cursor-pointer transition-colors">
+                                    <i class="fa-solid fa-chevron-left text-xs"></i>
+                                </button>
+                                <button type="button" onclick="changeModalSlide(1)"
+                                    class="w-8 h-8 rounded-lg bg-[#08101e]/90 hover:bg-blue-600 border border-blue-400/30 text-white flex items-center justify-center cursor-pointer transition-colors">
+                                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="relative z-10 my-3 space-y-1">
+                            <div class="text-2xl sm:text-3xl font-black text-white font-display">
+                                ${escapeHtml(acc.code)}
+                            </div>
+                            <div class="text-xs sm:text-sm font-bold text-amber-300">
+                                ${escapeHtml(currentSlide.sub)}
+                            </div>
+                            <div class="text-xs text-slate-200">
+                                ${escapeHtml(currentSlide.hl)}
+                            </div>
+                        </div>
+
+                        <div class="relative z-10 flex items-center gap-1.5">
+                            ${slides.map((s, sIdx) => `
+                                <button type="button" onclick="selectModalSlide(${sIdx})"
+                                    class="px-2.5 py-1 rounded-lg text-[10px] font-extrabold cursor-pointer transition-colors ${sIdx === idx
+                                        ? 'bg-blue-600 text-white'
+                                        : 'bg-[#08101e]/85 text-slate-300 hover:text-white border border-armory-border'}">
+                                    ${escapeHtml(s.label)}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+
+            container.innerHTML = `
+                <div class="space-y-3">
+                    <div class="flex flex-wrap items-center gap-2 pr-10">
+                        <span class="px-2.5 py-0.5 rounded-full bg-slate-800 border border-slate-600 text-slate-200 text-[10px] font-extrabold uppercase">
+                            ${escapeHtml(gameLabel)}
+                        </span>
+                        ${isSold
+                            ? <span class="px-2.5 py-0.5 rounded-full bg-rose-500/20 border border-rose-500/40 text-rose-300 text-[10px] font-extrabold uppercase">SOLD</span>
+                            : <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-[10px] font-extrabold uppercase">AVAILABLE</span>
+                        }
+                        <span class="px-2.5 py-0.5 rounded-full bg-blue-500/15 border border-blue-400/30 text-blue-300 text-[10px] font-bold">
+                            ${escapeHtml(acc.rankBadge)}
+                        </span>
+                    </div>
+
+                    <h3 class="text-lg sm:text-xl font-extrabold text-white">
+                        ${escapeHtml(acc.title)}
+                    </h3>
+                </div>
+
+                ${stageHtml}
+
+                <div class="grid grid-cols-3 rounded-2xl bg-[#080d16] border border-armory-border divide-x divide-armory-border text-center py-3">
+                    <div>
+                        <div class="text-[11px] text-slate-400">${stat1Lbl}</div>
+                        <div class="text-base font-extrabold text-white mt-0.5">${escapeHtml(acc.skins)}</div>
+                    </div>
+                    <div>
+                        <div class="text-[11px] text-slate-400">${stat2Lbl}</div>
+                        <div class="text-base font-extrabold text-white mt-0.5">${escapeHtml(acc.heroes)}</div>
+                    </div>
+                    <div>
+                        <div class="text-[11px] text-slate-400">${stat3Lbl}</div>
+                        <div class="text-base font-extrabold text-emerald-400 mt-0.5">${escapeHtml(acc.winrate || '—')}</div>
+                    </div>
+                </div>
+
+                <div class="space-y-2.5">
+                    <div class="flex flex-wrap gap-1.5">
+                        ${(acc.highlights || []).map((hl) => `
+                            <span class="px-2.5 py-1 rounded-lg bg-[#0b1322] border border-armory-border text-xs font-semibold text-slate-200">
+                                ${escapeHtml(hl)}
+                            </span>
+                        `).join('')}
+
+</div>
+                    <p class="text-xs sm:text-sm text-slate-300 bg-[#080d16] border border-armory-border rounded-2xl p-3.5 leading-relaxed">
+                        ${escapeHtml(acc.notes || 'Contact @KIFYCASS on Telegram for full account details.')}
+                    </p>
+                </div>
+
+                <div class="pt-3 border-t border-armory-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <div class="text-xs text-slate-400">Price</div>
+                        <div class="text-2xl font-black text-sky-400 font-display">
+                            ${formatNum(acc.price)} <span class="text-xs font-bold text-slate-400">MMK</span>
+                        </div>
+                    </div>
+
+                    <a href="${tgOrderUrl(orderMsg)}" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl neon-blue-btn text-white text-xs sm:text-sm font-extrabold">
+                        <i class="fa-brands fa-telegram text-base"></i>
+                        <span>Telegram ဖြင့် တိုက်ရိုက် ဝယ်ယူမည်</span>
+                    </a>
+                </div>
+            `;
+        }
+
+        function changeModalSlide(delta) {
+            const pool = state.modalGame === 'pubg' ? state.pubg : state.mlbb;
+            const acc = pool.find((a) => a.id === state.modalAccId);
+            if (!acc) return;
+            const hasPhotos = Array.isArray(acc.images) && acc.images.length > 0;
+            const total = hasPhotos ? acc.images.length : ((acc.slides && acc.slides.length) || 1);
+            state.modalSlideIdx = (state.modalSlideIdx + delta + total) % total;
+            renderAccountModalContent();
+        }
+
+        function selectModalSlide(idx) {
+            state.modalSlideIdx = idx;
+            renderAccountModalContent();
+        }
+
+        function renderDiaView() {
+            const bundlesGrid = document.getElementById('diaBundlesGrid');
+            const pkgsGrid = document.getElementById('diaPackagesGrid');
+            if (!bundlesGrid || !pkgsGrid) return;
+
+            bundlesGrid.innerHTML = (state.dia.bundles || []).map((b) => {
+                const msg = မင်္ဂလာပါ KIFY GAME STORE (@KIFYCASS)၊ MLBB ${b.name} (${formatNum(b.price)} ks) ဝယ်ယူလိုပါသည်။;
+                return `
+                    <a href="${tgOrderUrl(msg)}" target="_blank" rel="noopener noreferrer"
+                        class="armory-card rounded-2xl p-4 flex items-center justify-between gap-3 group">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <div class="w-9 h-9 rounded-xl bg-blue-500/15 border border-blue-400/25 flex items-center justify-center text-sky-400 flex-shrink-0">
+                                <i class="fa-regular fa-gem text-sm"></i>
+                            </div>
+                            <span class="text-sm sm:text-base font-extrabold text-white group-hover:text-sky-300 truncate transition-colors">
+                                ${escapeHtml(b.name)}
+                            </span>
+                        </div>
+                        <span class="text-sm sm:text-base font-extrabold text-sky-400 whitespace-nowrap">
+                            ${formatNum(b.price)} ks
+                        </span>
+                    </a>
+                `;
+            }).join('');
+
+            pkgsGrid.innerHTML = (state.dia.packages || []).map((p) => {
+                const msg = မင်္ဂလာပါ KIFY GAME STORE (@KIFYCASS)၊ MLBB ${p.amount} Diamonds (${formatNum(p.price)} ks) ဝယ်ယူလိုပါသည်။;
+                return `
+                    <a href="${tgOrderUrl(msg)}" target="_blank" rel="noopener noreferrer"
+                        class="rounded-2xl bg-[#0b1322] hover:bg-[#111d33] border border-armory-border hover:border-blue-500/45 px-4 py-3 flex items-center justify-between gap-3 transition-all group">
+                        <span class="inline-flex items-center gap-2.5 text-sm font-extrabold text-white">
+                            <i class="fa-regular fa-gem text-sky-400 text-xs"></i>
+                            <span>${escapeHtml(p.amount)}</span>
+                        </span>
+                        <span class="text-sm font-extrabold text-sky-400 group-hover:text-sky-300 whitespace-nowrap">
+                            ${formatNum(p.price)} ks
+                        </span>
+                    </a>
+                `;
+            }).join('');
+        }
+
+        function renderTgView() {
+            const premGrid = document.getElementById('tgPremiumGrid');
+            const starsGrid = document.getElementById('tgStarsGrid');
+            if (!premGrid || !starsGrid) return;
+
+            premGrid.innerHTML = (state.tg.premium || []).map((p) => {
+                const msg = မင်္ဂလာပါ KIFY GAME STORE (@KIFYCASS)၊ Telegram Premium ${p.name} (${formatNum(p.price)} ks) ဝယ်ယူလိုပါသည်။;
+                return `
+                    <a href="${tgOrderUrl(msg)}" target="_blank" rel="noopener noreferrer"
+                        class="rounded-2xl bg-[#0b1322] hover:bg-[#111d33] border border-armory-border hover:border-blue-500/45 p-4 flex items-center justify-between gap-3 transition-all group">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <div class="w-9 h-9 rounded-xl bg-blue-500/15 border border-blue-400/25 flex items-center justify-center text-sky-400 flex-shrink-0">
+                                <i class="fa-brands fa-telegram text-base"></i>
+                            </div>
+                            <div class="leading-snug min-w-0">
+                                <div class="text-[10px] font-extrabold tracking-wider text-slate-400 uppercase">
+                                    TELEGRAM PREMIUM
+                                </div>
+                                <div class="text-sm font-extrabold text-white group-hover:text-sky-300 truncate transition-colors">
+                                    ${escapeHtml(p.name)}
+                                </div>
+                            </div>
+                        </div>
+                        <span class="text-sm sm:text-base font-extrabold text-sky-400 whitespace-nowrap">
+                            ${formatNum(p.price)} ks
+                        </span>
+                    </a>
+                `;
+            }).join('');
+
+            starsGrid.innerHTML = (state.tg.stars || []).map((s) => {
+                const msg = မင်္ဂလာပါ KIFY GAME STORE (@KIFYCASS)၊ Telegram Star ${s.amount} (${formatNum(s.price)} ks) ဝယ်ယူလိုပါသည်။;
+                return `
+                    <a href="${tgOrderUrl(msg)}" target="_blank" rel="noopener noreferrer"
+                        class="rounded-2xl bg-[#0b1322] hover:bg-[#111d33] border border-armory-border hover:border-blue-500/45 px-4 py-3 flex items-center justify-between gap-3 transition-all group">
+                        <span class="inline-flex items-center gap-2.5 text-sm font-extrabold text-white">
+                            <i class="fa-solid fa-star text-amber-400 text-xs"></i>
+                            <span>${escapeHtml(s.amount)}</span>
+                        </span>
+                        <span class="text-sm font-extrabold text-sky-400 group-hover:text-sky-300 whitespace-nowrap">
+                            ${formatNum(s.price)} ks
+                        </span>
+                    </a>
+                `;
+            }).join('');
+        }
+
+        function openAdminPreview(defaultTab = 'mlbb') {
+            document.getElementById('adminPreviewModal').classList.remove('hidden');
+            switchAdminSubTab(defaultTab);
+        }
+
+        function closeModal(id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.add('hidden');
+        }
+
+function switchAdminSubTab(tab) {
+            ['mlbb', 'pubg', 'dia', 'tg'].forEach((t) => {
+                const btn = document.getElementById(admTab-${t});
+                if (btn) {
+                    btn.className = t === tab
+                        ? 'adm-subtab px-3.5 py-2 rounded-xl text-xs font-extrabold bg-blue-600 text-white cursor-pointer'
+                        : 'adm-subtab px-3.5 py-2 rounded-xl text-xs font-bold bg-[#090e18] hover:bg-[#10192b] text-slate-300 border border-armory-border cursor-pointer';
+                }
+            });
+
+            const sharedPane = document.getElementById('admPane-accountsShared');
+            const diaPane = document.getElementById('admPane-dia');
+            const tgPane = document.getElementById('admPane-tg');
+
+            if (tab === 'mlbb' || tab === 'pubg') {
+                state.adminGameMode = tab;
+                sharedPane.classList.remove('hidden');
+                diaPane.classList.add('hidden');
+                tgPane.classList.add('hidden');
+                applyGameLabelsToAdminForm();
+                clearAdminAccountForm();
+                renderAdminAccountsList();
+            } else if (tab === 'dia') {
+                sharedPane.classList.add('hidden');
+                diaPane.classList.remove('hidden');
+                tgPane.classList.add('hidden');
+                renderAdminDiaEditor();
+            } else if (tab === 'tg') {
+                sharedPane.classList.add('hidden');
+                diaPane.classList.add('hidden');
+                tgPane.classList.remove('hidden');
+                renderAdminTgEditor();
+            }
+        }
+
+        function applyGameLabelsToAdminForm() {
+            const isPubg = state.adminGameMode === 'pubg';
+            document.getElementById('admBannerLabel').textContent = isPubg
+                ? 'PUBG အကောင့်ဈေးနှုန်းများ Frame Banner Image'
+                : 'Mobile Legends Frame Banner Image';
+            document.getElementById('admRankLabel').textContent = isPubg ? 'Tier / Frame Badge *' : 'Rank Badge *';
+            document.getElementById('admStat1Label').textContent = isPubg ? 'Outfits Count *' : 'Skins Count *';
+            document.getElementById('admStat2Label').textContent = isPubg ? 'Gun Skins Count *' : 'Heroes Count *';
+            document.getElementById('admStat3Label').textContent = isPubg ? 'RP / Tier Note' : 'Win Rate';
+        }
+
+        async function handleFrameBannerUpload(e) {
+            const file = e.target.files && e.target.files[0];
+            if (!file) return;
+            const dataUrl = await compressImageFile(file, 900, 0.72);
+            if (dataUrl) {
+                state.banners[state.adminGameMode] = dataUrl;
+                await saveToStorage();
+                syncBannerUI();
+                showToast(${state.adminGameMode.toUpperCase()} frame banner updated, 'success');
+            }
+            e.target.value = '';
+        }
+
+        async function clearFrameBanner() {
+            state.banners[state.adminGameMode] = '';
+            await saveToStorage();
+            syncBannerUI();
+            showToast(${state.adminGameMode.toUpperCase()} frame banner cleared, 'info');
+        }
+
+        async function handleAdminAccountImagesUpload(e) {
+            const files = Array.from((e.target && e.target.files) || []);
+            if (files.length === 0) return;
+            for (const f of files) {
+                const compressed = await compressImageFile(f, 720, 0.72);
+                if (compressed) {
+                    state.draftAccountImages.push(compressed);
+                }
+            }
+            e.target.value = '';
+            renderDraftAccountImagesPreview();
+        }
+
+        function renderDraftAccountImagesPreview() {
+            const wrap = document.getElementById('admAccountImagesPreview');
+            if (!wrap) return;
+            if (!state.draftAccountImages || state.draftAccountImages.length === 0) {
+                wrap.innerHTML = <span class="text-xs text-slate-500 self-center mx-auto">No custom photos uploaded yet (default slide card will be shown).</span>;
+                return;
+            }
+
+            wrap.innerHTML = state.draftAccountImages.map((src, idx) => `
+                <div class="relative w-20 h-16 rounded-xl overflow-hidden border border-armory-borderBright bg-black group">
+                    <img src="${src}" alt="Photo ${idx + 1}" class="w-full h-full object-cover" />
+                    <span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-black/75 text-[10px] font-bold text-white">#${idx + 1}</span>
+                    <div class="absolute top-1 right-1 flex items-center gap-0.5">
+                        ${idx > 0 ? `
+                            <button type="button" onclick="moveDraftPhoto(${idx}, -1)" title="Move Left"
+                                class="w-5 h-5 rounded bg-black/80 hover:bg-blue-600 text-white text-[9px] flex items-center justify-center cursor-pointer">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                        ` : ''}
+                        <button type="button" onclick="removeDraftPhoto(${idx})" title="Remove"
+                            class="w-5 h-5 rounded bg-red-600/90 hover:bg-red-500 text-white text-[9px] flex items-center justify-center cursor-pointer">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function moveDraftPhoto(idx, delta) {
+            const next = idx + delta;
+            if (next < 0 || next >= state.draftAccountImages.length) return;
+            const copy = [...state.draftAccountImages];
+            const [item] = copy.splice(idx, 1);
+            copy.splice(next, 0, item);
+            state.draftAccountImages = copy;
+            renderDraftAccountImagesPreview();
+        }
+
+        function removeDraftPhoto(idx) {
+            state.draftAccountImages.splice(idx, 1);
+            renderDraftAccountImagesPreview();
+        }
+
+        function getActiveGamePool() {
+            return state.adminGameMode === 'pubg' ? state.pubg : state.mlbb;
+        }
+
+        async function saveAccountFromAdmin(e) {
+            e.preventDefault();
+            const pool = getActiveGamePool();
+            const editId = document.getElementById('admEditAccId').value.trim();
+            const code = document.getElementById('admAccCode').value.trim().toUpperCase();
+            const title = document.getElementById('admAccTitle').value.trim();
+            const rankBadge = document.getElementById('admAccRank').value.trim();
+            const price = Number(document.getElementById('admAccPrice').value || 0);
+            const status = document.getElementById('admAccStatus').value;
+            const skins = Number(document.getElementById('admAccSkins').value || 0);
+            const heroes = Number(document.getElementById('admAccHeroes').value || 0);
+            const winrate = document.getElementById('admAccWinrate').value.trim();
+            const highlights = document.getElementById('admAccHighlights').value
+                .split(',')
+                .map((s) => s.trim())
+                .filter(Boolean);
+            const notes = document.getElementById('admAccNotes').value.trim();
+            const images = [...state.draftAccountImages];
+
+            const slides = [
+                {
+                    label: 'SLIDE 1',
+                    sub: ${rankBadge} • ${skins} ${state.adminGameMode === 'pubg' ? 'Outfits' : 'Skins'},
+                    hl: highlights.slice(0, 2).join(' • ') || 'VIP Account Showcase'
+                },
+                {
+                    label: 'SLIDE 2',
+                    sub: ${heroes} ${state.adminGameMode === 'pubg' ? 'Gun Skins' : 'Heroes'} • ${winrate || 'Clean'},
+                    hl: highlights.slice(2).join(' • ') || 'Instant Handover • @KIFYCASS'
+                }
+            ];
+
+if (editId) {
+                const target = pool.find((a) => a.id === editId);
+                if (target) {
+                    Object.assign(target, {
+                        code,
+                        title,
+                        rankBadge,
+                        price,
+                        status,
+                        skins,
+                        heroes,
+                        winrate,
+                        highlights,
+                        notes,
+                        images,
+                        slides
+                    });
+                    showToast(Updated ${code}, 'success');
+                }
+            } else {
+                pool.unshift({
+                    id: ${state.adminGameMode}-${Date.now()},
+                    code,
+                    title,
+                    rankBadge,
+                    price,
+                    status,
+                    skins,
+                    heroes,
+                    winrate,
+                    highlights,
+                    notes,
+                    images,
+                    slides,
+                    createdAt: Date.now()
+                });
+                showToast(Added ${code}, 'success');
+            }
+
+            await saveToStorage();
+            clearAdminAccountForm();
+            renderAdminAccountsList();
+            if (state.currentView === 'accounts') renderAccountsView();
+            if (state.currentView === 'pubg') renderPubgView();
+        }
+
+        function editAccountInAdmin(accId) {
+            const pool = getActiveGamePool();
+            const acc = pool.find((a) => a.id === accId);
+            if (!acc) return;
+
+            document.getElementById('admEditAccId').value = acc.id;
+            document.getElementById('admAccCode').value = acc.code;
+            document.getElementById('admAccTitle').value = acc.title;
+            document.getElementById('admAccRank').value = acc.rankBadge;
+            document.getElementById('admAccPrice').value = acc.price;
+            document.getElementById('admAccStatus').value = acc.status;
+            document.getElementById('admAccSkins').value = acc.skins;
+            document.getElementById('admAccHeroes').value = acc.heroes;
+            document.getElementById('admAccWinrate').value = acc.winrate || '';
+            document.getElementById('admAccHighlights').value = (acc.highlights || []).join(', ');
+            document.getElementById('admAccNotes').value = acc.notes || '';
+            state.draftAccountImages = Array.isArray(acc.images) ? [...acc.images] : [];
+            renderDraftAccountImagesPreview();
+
+            document.getElementById('admAccFormTitle').textContent = Edit Account (${acc.code});
+            document.getElementById('admCancelEditBtn').classList.remove('hidden');
+        }
+
+        function clearAdminAccountForm() {
+            document.getElementById('admEditAccId').value = '';
+            document.getElementById('admAccCode').value = '';
+            document.getElementById('admAccTitle').value = '';
+            document.getElementById('admAccRank').value = '';
+            document.getElementById('admAccPrice').value = '';
+            document.getElementById('admAccStatus').value = 'AVAILABLE';
+            document.getElementById('admAccSkins').value = '';
+            document.getElementById('admAccHeroes').value = '';
+            document.getElementById('admAccWinrate').value = '';
+            document.getElementById('admAccHighlights').value = '';
+            document.getElementById('admAccNotes').value = '';
+            state.draftAccountImages = [];
+            renderDraftAccountImagesPreview();
+            document.getElementById('admAccFormTitle').textContent = state.adminGameMode === 'pubg'
+                ? 'Add New PUBG Mobile Account'
+                : 'Add New Mobile Legends Account';
+            document.getElementById('admCancelEditBtn').classList.add('hidden');
+        }
+
+        async function toggleAccountStatusInAdmin(accId) {
+            const pool = getActiveGamePool();
+            const acc = pool.find((a) => a.id === accId);
+            if (!acc) return;
+            acc.status = acc.status === 'AVAILABLE' ? 'SOLD' : 'AVAILABLE';
+            await saveToStorage();
+            renderAdminAccountsList();
+            if (state.currentView === 'accounts') renderAccountsView();
+            if (state.currentView === 'pubg') renderPubgView();
+            showToast(${acc.code} marked ${acc.status}, 'info');
+        }
+
+        async function deleteAccountInAdmin(accId) {
+            if (state.adminGameMode === 'pubg') {
+                state.pubg = state.pubg.filter((a) => a.id !== accId);
+            } else {
+                state.mlbb = state.mlbb.filter((a) => a.id !== accId);
+            }
+            await saveToStorage();
+            renderAdminAccountsList();
+            if (state.currentView === 'accounts') renderAccountsView();
+            if (state.currentView === 'pubg') renderPubgView();
+            showToast('Account removed', 'info');
+        }
+
+        function renderAdminAccountsList() {
+            const wrap = document.getElementById('admAccountsList');
+            if (!wrap) return;
+            const pool = getActiveGamePool();
+            wrap.innerHTML = pool.map((acc) => {
+                const isSold = acc.status === 'SOLD';
+                const photoBadge = (acc.images && acc.images.length > 0)
+                    ? <span class="text-[10px] text-sky-400 ml-1.5"><i class="fa-solid fa-image"></i> ${acc.images.length}</span>
+                    : '';
+                return `
+                    <div class="rounded-xl bg-[#090e18] border border-armory-border px-3.5 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs">
+                        <div class="min-w-0">
+                            <span class="font-extrabold text-amber-400 mr-1.5">${escapeHtml(acc.code)}</span>
+                            <span class="font-bold text-white">${escapeHtml(acc.title)}</span>
+                            <span class="text-sky-400 font-bold ml-2">${formatNum(acc.price)} MMK</span>
+                            ${photoBadge}
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <button type="button" onclick="toggleAccountStatusInAdmin('${escapeHtml(acc.id)}')"
+                                class="px-2.5 py-1 rounded-lg text-[10px] font-extrabold uppercase cursor-pointer ${isSold
+                                    ? 'bg-rose-500/20 text-rose-300 border border-rose-500/35'
+                                    : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/35'}">
+                                ${escapeHtml(acc.status)}
+                            </button>
+                            <button type="button" onclick="editAccountInAdmin('${escapeHtml(acc.id)}')"
+                                class="px-2.5 py-1 rounded-lg bg-blue-500/15 hover:bg-blue-500/25 text-blue-300 border border-blue-500/30 text-[10px] font-bold cursor-pointer">
+                                Edit
+                            </button>
+                            <button type="button" onclick="deleteAccountInAdmin('${escapeHtml(acc.id)}')"
+                                class="px-2.5 py-1 rounded-lg bg-red-500/15 hover:bg-red-500/25 text-red-300 border border-red-500/30 text-[10px] font-bold cursor-pointer">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderAdminDiaEditor() {
+            const wrap = document.getElementById('admDiaEditorList');
+            if (!wrap) return;
+            const bundleRows = (state.dia.bundles || []).map((b) => `
+                <div class="rounded-xl bg-[#090e18] border border-armory-border p-2.5 flex items-center justify-between gap-2 text-xs">
+
+<span class="font-bold text-white truncate">${escapeHtml(b.name)}</span>
+                    <input type="number" data-dia-bundle-id="${escapeHtml(b.id)}" value="${Number(b.price)}"
+                        class="w-28 bg-armory-card border border-armory-border focus:border-blue-500 rounded-lg px-2.5 py-1 text-right font-bold text-sky-400 focus:outline-none" />
+                </div>
+            `).join('');
+
+            const pkgRows = (state.dia.packages || []).map((p) => `
+                <div class="rounded-xl bg-[#090e18] border border-armory-border p-2.5 flex items-center justify-between gap-2 text-xs">
+                    <span class="font-extrabold text-slate-200"><i class="fa-regular fa-gem text-sky-400 mr-1.5"></i>${escapeHtml(p.amount)}</span>
+                    <input type="number" data-dia-pkg-id="${escapeHtml(p.id)}" value="${Number(p.price)}"
+                        class="w-28 bg-armory-card border border-armory-border focus:border-blue-500 rounded-lg px-2.5 py-1 text-right font-bold text-sky-400 focus:outline-none" />
+                </div>
+            `).join('');
+
+            wrap.innerHTML = bundleRows + pkgRows;
+        }
+
+        async function saveDiaFromAdmin() {
+            document.querySelectorAll('[data-dia-bundle-id]').forEach((input) => {
+                const id = input.getAttribute('data-dia-bundle-id');
+                const item = state.dia.bundles.find((b) => b.id === id);
+                if (item) item.price = Math.max(0, Number(input.value || 0));
+            });
+
+            document.querySelectorAll('[data-dia-pkg-id]').forEach((input) => {
+                const id = input.getAttribute('data-dia-pkg-id');
+                const item = state.dia.packages.find((p) => p.id === id);
+                if (item) item.price = Math.max(0, Number(input.value || 0));
+            });
+
+            await saveToStorage();
+            if (state.currentView === 'dia') renderDiaView();
+            showToast('Dia prices saved', 'success');
+        }
+
+        function renderAdminTgEditor() {
+            const wrap = document.getElementById('admTgEditorList');
+            if (!wrap) return;
+            const premRows = (state.tg.premium || []).map((p) => `
+                <div class="rounded-xl bg-[#090e18] border border-armory-border p-2.5 flex items-center justify-between gap-2 text-xs">
+                    <span class="font-bold text-white truncate">${escapeHtml(p.name)}</span>
+                    <input type="number" data-tg-prem-id="${escapeHtml(p.id)}" value="${Number(p.price)}"
+                        class="w-28 bg-armory-card border border-armory-border focus:border-blue-500 rounded-lg px-2.5 py-1 text-right font-bold text-sky-400 focus:outline-none" />
+                </div>
+            `).join('');
+
+            const starRows = (state.tg.stars || []).map((s) => `
+                <div class="rounded-xl bg-[#090e18] border border-armory-border p-2.5 flex items-center justify-between gap-2 text-xs">
+                    <span class="font-extrabold text-slate-200"><i class="fa-solid fa-star text-amber-400 mr-1.5"></i>${escapeHtml(s.amount)}</span>
+                    <input type="number" data-tg-star-id="${escapeHtml(s.id)}" value="${Number(s.price)}"
+                        class="w-28 bg-armory-card border border-armory-border focus:border-blue-500 rounded-lg px-2.5 py-1 text-right font-bold text-sky-400 focus:outline-none" />
+                </div>
+            `).join('');
+
+            wrap.innerHTML = premRows + starRows;
+        }
+
+        async function saveTgFromAdmin() {
+            document.querySelectorAll('[data-tg-prem-id]').forEach((input) => {
+                const id = input.getAttribute('data-tg-prem-id');
+                const item = state.tg.premium.find((p) => p.id === id);
+                if (item) item.price = Math.max(0, Number(input.value || 0));
+            });
+
+            document.querySelectorAll('[data-tg-star-id]').forEach((input) => {
+                const id = input.getAttribute('data-tg-star-id');
+                const item = state.tg.stars.find((s) => s.id === id);
+                if (item) item.price = Math.max(0, Number(input.value || 0));
+            });
+
+            await saveToStorage();
+            if (state.currentView === 'tg') renderTgView();
+            showToast('TG & Star prices saved', 'success');
+        }
+
+        async function resetAllPreviewData() {
+            state.mlbb = cloneData(DEFAULT_MLBB_ACCOUNTS);
+            state.pubg = cloneData(DEFAULT_PUBG_ACCOUNTS);
+            state.dia = cloneData(DEFAULT_DIA);
+            state.tg = cloneData(DEFAULT_TG);
+            state.banners = cloneData(DEFAULT_BANNERS);
+            await saveToStorage();
+            syncBannerUI();
+            clearAdminAccountForm();
+            renderAdminAccountsList();
+            renderAdminDiaEditor();
+            renderAdminTgEditor();
+            renderAccountsView();
+            renderPubgView();
+            renderDiaView();
+            renderTgView();
+            showToast('Reset all MLBB, PUBG, Dia & TG defaults', 'info');
+        }
+
+        Object.assign(window, {
+            navigateTo,
+            openAdminPreview,
+            closeModal,
+            switchAdminSubTab,
+            handleFrameBannerUpload,
+            clearFrameBanner,
+            handleAdminAccountImagesUpload,
+            moveDraftPhoto,
+            removeDraftPhoto,
+            saveAccountFromAdmin,
+            editAccountInAdmin,
+            clearAdminAccountForm,
+            toggleAccountStatusInAdmin,
+            deleteAccountInAdmin,
+            saveDiaFromAdmin,
+            saveTgFromAdmin,
+            resetAllPreviewData,
+            renderAccountsView,
+            resetAccountFilters,
+            renderPubgView,
+            resetPubgFilters,
+            openAccountModal,
+            changeModalSlide,
+            selectModalSlide
+        });
+
+        window.addEventListener('DOMContentLoaded', async () => {
+            loadFromLocal();
+            syncBannerUI();
+            navigateTo('hub');
+            await loadFromFirebase();
+        });
+    </script>
 </body>
 </html>
