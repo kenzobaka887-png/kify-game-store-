@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="my">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0a0a0d">
+<title>KIFY GAME STORE</title>
+<style>
+:root{--bg:#09090c;--panel:#151519;--gold:#f5c451;--gold2:#e58a16;--muted:#aaa39a;--line:#72552266;--white:#f7f1df}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 90% 5%,#38230d 0,transparent 27%),var(--bg);color:var(--white);font-family:system-ui,-apple-system,"Noto Sans Myanmar",sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.wrap{max-width:1100px;margin:auto;padding:0 15px}
+header{position:sticky;top:0;z-index:10;background:#0b0b0def;backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.top{display:flex;align-items:center;justify-content:space-between;padding:13px 0;gap:10px}.brand{display:flex;align-items:center;gap:11px}.logo{width:49px;height:49px;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-weight:950;background:linear-gradient(145deg,#39290e,#09090c);box-shadow:0 0 20px #d99c2540}.brand h1{font-size:clamp(17px,4vw,26px);margin:0;background:linear-gradient(90deg,#ffe58b,#e99a24);color:transparent;background-clip:text}.brand small{font-size:10px;letter-spacing:2px;color:var(--muted)}.pill{font-size:11px;padding:6px 10px;border:1px solid #a87924;border-radius:25px;color:var(--gold);background:#30220d;white-space:nowrap}
+.search{padding-bottom:13px}.search input{width:100%;border-radius:30px;background:#1a1b24;border:1px solid #33313a;padding:13px 17px;color:white;outline:none}.hero{margin:24px 0;padding:30px 23px;border:1px solid #98732c;border-radius:25px;background:radial-gradient(circle at 95% 35%,#69400f88,transparent 38%),linear-gradient(130deg,#111115,#1c1710 75%,#38230c);box-shadow:0 15px 40px #0008}.eyebrow{display:inline-block;padding:7px 12px;border:1px solid #9e7628;border-radius:25px;background:#2a210f;color:#f8d46d;font-size:11px;font-weight:800}.hero h2{font-size:clamp(26px,5vw,42px);line-height:1.4;margin:18px 0 8px}.gold{color:var(--gold)}.hero p{color:#c2bcb2;line-height:1.8;max-width:650px}.btn,.buy{border:0;border-radius:13px;padding:12px 18px;background:linear-gradient(100deg,#ffdb61,#e58a13);color:#171006;font-weight:900}.head{display:flex;justify-content:space-between;align-items:end;margin:25px 0 13px;gap:10px}.head h2{font-size:21px;margin:0}.head span{font-size:12px;color:var(--muted)}.cats{display:flex;gap:8px;overflow:auto;padding-bottom:10px}.cat{white-space:nowrap;border:1px solid var(--line);border-radius:25px;background:#17171b;color:#ddd2bd;padding:9px 14px}.cat.active{background:linear-gradient(100deg,#f6cf5a,#d98617);color:#1a1205;font-weight:900}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:15px;padding-bottom:25px}.card{background:linear-gradient(145deg,#1b1a18,#111115 68%);border:1px solid var(--line);border-radius:20px;overflow:hidden}.cover{height:155px;background:linear-gradient(135deg,#403018,#16151a);display:grid;place-items:center;position:relative}.cover img{width:100%;height:100%;object-fit:cover}.fallback{font-size:48px}.tag{position:absolute;left:11px;bottom:10px;background:#30230fdd;color:#ffdc75;border:1px solid #d2a63e;border-radius:25px;padding:5px 9px;font-size:10px;font-weight:800}.body{padding:14px}.body h3{margin:0 0 7px;font-size:17px}.desc{font-size:12px;line-height:1.6;color:var(--muted);min-height:38px;white-space:pre-wrap}.meta{display:flex;justify-content:space-between;align-items:center;margin:13px 0}.price{font-size:19px;color:#ffd46b;font-weight:900}.stock{font-size:11px;color:#9fe0a8}.buy{width:100%;padding:10px}.empty{padding:30px;text-align:center;border:1px dashed var(--line);border-radius:18px;color:var(--muted);grid-column:1/-1}.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:11px;margin:15px 0 30px}.info div{padding:16px;border:1px solid var(--line);border-radius:16px;background:#151419}.info b{display:block;color:var(--gold);margin-bottom:5px}.info span{font-size:12px;color:var(--muted)}footer{border-top:1px solid var(--line);padding:25px 0 40px;text-align:center;color:var(--muted);font-size:12px}
+.adminFab{position:fixed;right:14px;bottom:15px;z-index:20;border:1px solid #a77c2b;border-radius:30px;background:#21190c;color:#ffda72;padding:12px 15px;font-weight:800;box-shadow:0 8px 25px #0009}
+.modal{display:none;position:fixed;inset:0;z-index:30;background:#000c;padding:12px;align-items:center;justify-content:center}.modal.show{display:flex}.dialog{width:min(680px,100%);max-height:92vh;overflow:auto;background:#151519;border:1px solid #9c762d;border-radius:20px;padding:18px}.dialog h2{color:var(--gold);margin:0 0 14px}.field{margin:10px 0}.field label{display:block;font-size:12px;color:#c9c1b3;margin-bottom:5px}.field input,.field select,.field textarea{width:100%;padding:11px;border:1px solid #3a3730;border-radius:10px;background:#0e0e12;color:white;outline:none}.field textarea{min-height:65px}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.row>*{flex:1}.secondary,.danger{border:1px solid #62502b;border-radius:10px;padding:9px 12px;background:#24211b;color:#f3d27c}.danger{border-color:#763c3c;color:#ff9b9b}.tabs{display:flex;gap:8px;margin:12px 0}.tab{background:#24211b;color:#e8d8ae;border:1px solid var(--line);border-radius:9px;padding:9px 12px}.tab.active{background:#63430e;color:#ffe18b}.adminItem{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px;border:1px solid #37332a;border-radius:11px;margin:8px 0}.adminItem small{display:block;color:var(--muted);font-size:11px}.note{font-size:12px;color:#c3b9a7;line-height:1.6}.hidden{display:none!important}.status{font-size:11px;color:#ffda72}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="top"><div class="brand"><div class="logo">KIFY</div><div><h1>KIFY GAME STORE</h1><small>GAMING MARKETPLACE</small></div></div><span class="pill">ONLINE STORE</span></div><div class="search"><input id="search" placeholder="🔎 Account, Rank, Skin ရှာရန်..." oninput="renderProducts()"></div></div></header>
+<main class="wrap">
+<section class="hero"><span class="eyebrow">🎮 KIFY GAME STORE · PREMIUM CENTER</span><h2><span class="gold">Game Account</span><br>ဝယ်ယူရောင်းချရန်</h2><p>MLBB နှင့် PUBG Game Account များကို ရှာဖွေကြည့်ရှုပြီး Website မှတစ်ဆင့် Order တင်နိုင်ပါသည်။</p><button class="btn" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">Account များကြည့်ရန်　➜</button></section>
+<div class="head"><h2>Game Categories</h2><span>Choose your game</span></div>
+<div class="cats"><button class="cat active" onclick="setCategory('All',this)">All Games</button><button class="cat" onclick="setCategory('MLBB',this)">⚔️ Mobile Legends</button><button class="cat" onclick="setCategory('PUBG',this)">🎯 PUBG Mobile</button></div>
+<div class="head" id="products"><h2>Available Accounts</h2><span id="count">Loading...</span></div><section class="grid" id="productGrid"><div class="empty">Website ချိတ်ဆက်နေပါသည်...</div></section>
+<div class="head"><h2>Why KIFY?</h2><span>Our service</span></div><section class="info"><div><b>✦ Easy Ordering</b><span>Website မှာ Order တင်နိုင်ပါသည်။</span></div><div><b>✦ Account Details</b><span>Rank၊ Skin၊ Level နှင့် ဈေးနှုန်းများ ကြည့်နိုင်ပါသည်။</span></div><div><b>✦ Order Tracking</b><span>Order အခြေအနေကို ဆိုင် Admin မှ စီမံပေးပါမည်။</span></div></section>
+</main><footer>© <span id="year"></span> KIFY GAME STORE · All Rights Reserved</footer>
+<button class="adminFab" onclick="openAdmin()">⚙ Admin</button>
+
+<div class="modal" id="orderModal"><div class="dialog"><div class="row"><h2 style="flex:1">Order တင်ရန်</h2><button class="secondary" onclick="closeModal('orderModal')">✕</button></div><p id="orderProduct" class="note"></p><form id="orderForm"><input type="hidden" id="orderProductId"><div class="field"><label>သင့်အမည်</label><input id="customerName" maxlength="70" required></div><div class="field"><label>ဆက်သွယ်ရန် Telegram Username / ဖုန်း</label><input id="customerContact" maxlength="100" required></div><div class="field"><label>မှတ်ချက် (မရှိလျှင် ချန်ထားနိုင်သည်)</label><textarea id="customerNote" maxlength="500"></textarea></div><button class="btn" type="submit">Order တင်မည်</button></form><p class="note">Order တင်ပြီးနောက် ဆိုင် Admin က ဆက်သွယ်အတည်ပြုပေးပါမည်။ ငွေပေးချေမှု မလုပ်ရသေးပါ။</p></div></div>
+
+<div class="modal" id="adminModal"><div class="dialog"><div class="row"><h2 style="flex:1">⚙ KIFY Admin Panel</h2><button class="secondary" onclick="closeModal('adminModal')">✕</button></div>
+<div id="adminLogin"><p class="note">Admin အကောင့်ဖြင့် ဝင်ပါ။ Firebase Authentication တွင် ဖန်တီးထားသော Email နှင့် Password ကိုသုံးပါ။</p><form id="loginForm"><div class="field"><label>Admin Email</label><input type="email" id="adminEmail" required autocomplete="username"></div><div class="field"><label>Password</label><input type="password" id="adminPassword" required autocomplete="current-password"></div><button class="btn">Login</button></form><p id="loginError" class="note"></p></div>
+<div id="adminDashboard" class="hidden"><div class="row"><span id="adminIdentity" class="note"></span><button class="secondary" onclick="logoutAdmin()">Logout</button></div><div class="tabs"><button class="tab active" id="tabProducts" onclick="showAdminTab('products')">Products</button><button class="tab" id="tabOrders" onclick="showAdminTab('orders')">Orders</button></div>
+<section id="adminProducts"><h3>Account တင် / ပြင်ရန်</h3><form id="productForm"><input id="editProductId" type="hidden"><div class="field"><label>Game</label><select id="game"><option>MLBB</option><option>PUBG</option></select></div><div class="field"><label>Account ခေါင်းစဉ်</label><input id="productName" required maxlength="100"></div><div class="field"><label>ဈေးနှုန်း (MMK)</label><input id="productPrice" type="number" min="0" required></div><div class="field"><label>အသေးစိတ်</label><textarea id="productDetails" maxlength="1000"></textarea></div><div class="field"><label>ပုံ URL (Image link)</label><input id="productImage" type="url" placeholder="https://..."></div><label class="note"><input type="checkbox" id="productActive" checked> Customer တွေမြင်နိုင်သည်</label><div class="row" style="margin-top:12px"><button class="btn">Save Account</button><button class="secondary" type="button" onclick="resetProductForm()">Clear</button></div></form><h3>Products List</h3><div id="adminProductList"></div></section>
+<section id="adminOrders" class="hidden"><h3>Customer Orders</h3><div id="adminOrderList" class="note">Loading orders...</div></section>
+</div></div></div>
+<div id="toast" style="position:fixed;left:50%;bottom:75px;transform:translateX(-50%);background:#30230f;border:1px solid #d2a63e;color:#ffe18b;padding:10px 15px;border-radius:12px;display:none;z-index:80;max-width:90%;text-align:center"></div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs, doc, setDoc, deleteDoc, updateDoc, query, where, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+// Firebase Console > Project settings > Your apps မှာရတဲ့ config ကို ဒီနေရာမှာထည့်ပါ။
+const firebaseConfig = {
+  apiKey: "PASTE_API_KEY",
+  authDomain: "kify-game-store-c71e5.firebaseapp.com",
+  projectId: "kify-game-store-c71e5",
+  storageBucket: "kify-game-store-c71e5.appspot.com",
+  messagingSenderId: "PASTE_MESSAGING_SENDER_ID",
+  appId: "PASTE_APP_ID"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+let currentUser = null, products = [], adminProducts = [], category = "All", orderProduct = null;
+const $ = id => document.getElementById(id);
+const money = n => Number(n||0).toLocaleString("en-US")+" Ks";
+const esc = s => String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function toast(s){$("toast").textContent=s;$("toast").style.display="block";setTimeout(()=>$("toast").style.display="none",3200)}
+window.closeModal=id=>$(id).classList.remove("show");
+window.openAdmin=()=>{$("adminModal").classList.add("show")};
+window.setCategory=(c,b)=>{category=c;document.querySelectorAll(".cat").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderProducts()};
+window.showAdminTab=t=>{$("adminProducts").classList.toggle("hidden",t!=="products");$("adminOrders").classList.toggle("hidden",t!=="orders");$("tabProducts").classList.toggle("active",t==="products");$("tabOrders").classList.toggle("active",t==="orders");if(t==="orders")loadOrders()};
+async function loadProducts(){
+ try{const snap=await getDocs(query(collection(db,"products"),where("active","==",true)));products=snap.docs.map(d=>({id:d.id,...d.data()}));renderProducts()}
+ catch(e){$("productGrid").innerHTML='<div class="empty">Products မရယူနိုင်ပါ။ Firebase Setup ပြီး/မပြီး စစ်ဆေးပါ။</div>';console.error(e)}
+}
+function renderProducts(){
+ const q=$("search").value.toLowerCase().trim();
+ const list=products.filter(p=>(category==="All"||p.game===category)&&[p.name,p.game,p.details,p.price].join(" ").toLowerCase().includes(q));
+ $("count").textContent=list.length+" Accounts";
+ $("productGrid").innerHTML=list.length?list.map(p=>`<article class="card"><div class="cover">${p.image?`<img src="${esc(p.image)}" alt="${esc(p.name)}" onerror="this.style.display='none'">`:'<div class="fallback">🎮</div>'}<span class="tag">${p.game==="MLBB"?"⚔️ MLBB ACCOUNT":"🎯 PUBG ACCOUNT"}</span></div><div class="body"><h3>${esc(p.name)}</h3><div class="desc">${esc(p.details||"အသေးစိတ်ကို ဆက်သွယ်မေးမြန်းနိုင်ပါသည်။")}</div><div class="meta"><span class="price">${money(p.price)}</span><span class="stock">● Available</span></div><button class="buy" onclick="startOrder('${p.id}')">Order Now　➜</button></div></article>`).join(""):'<div class="empty">Account မရှိသေးပါ။ နောက်မှ ပြန်လာကြည့်ပါ။</div>';
+}
+window.startOrder=id=>{orderProduct=products.find(p=>p.id===id);if(!orderProduct)return;$("orderProductId").value=id;$("orderProduct").textContent=`${orderProduct.game} · ${orderProduct.name} · ${money(orderProduct.price)}`;$("orderModal").classList.add("show")};
+$("orderForm").addEventListener("submit",async e=>{
+ e.preventDefault();if(!orderProduct)return;
+ const b=e.submitter;b.disabled=true;b.textContent="တင်နေပါသည်...";
+ try{await addDoc(collection(db,"orders"),{productId:orderProduct.id,productName:orderProduct.name,game:orderProduct.game,price:Number(orderProduct.price),customerName:$("customerName").value.trim(),customerContact:$("customerContact").value.trim(),customerNote:$("customerNote").value.trim(),status:"Pending",createdAt:serverTimestamp()});$("orderForm").reset();closeModal("orderModal");toast("Order တင်ပြီးပါပြီ။ ဆိုင်မှ ဆက်သွယ်ပေးပါမည်။")}
+ catch(err){console.error(err);toast("Order မတင်နိုင်ပါ။ Firebase Rules ကိုစစ်ပါ။")}
+ finally{b.disabled=false;b.textContent="Order တင်မည်"}
+});
+$("loginForm").addEventListener("submit",async e=>{e.preventDefault();$("loginError").textContent="";try{await signInWithEmailAndPassword(auth,$("adminEmail").value,$("adminPassword").value)}catch(err){$("loginError").textContent="Login မအောင်မြင်ပါ။ Email / Password နှင့် Admin UID Rules ကိုစစ်ပါ။";console.error(err)}});
+onAuthStateChanged(auth,async user=>{
+ currentUser=user;
+ if(user){
+  $("adminLogin").classList.add("hidden");$("adminDashboard").classList.remove("hidden");$("adminIdentity").textContent=user.email||"Admin";await loadAdminProducts();
+ }else{$("adminLogin").classList.remove("hidden");$("adminDashboard").classList.add("hidden")}
+});
+window.logoutAdmin=()=>signOut(auth);
+$("productForm").addEventListener("submit",async e=>{
+ e.preventDefault();const b=e.submitter;b.disabled=true;
+ const data={game:$("game").value,name:$("productName").value.trim(),price:Number($("productPrice").value),details:$("productDetails").value.trim(),image:$("productImage").value.trim(),active:$("productActive").checked,updatedAt:serverTimestamp()};
+ try{const id=$("editProductId").value;if(id)await setDoc(doc(db,"products",id),data,{merge:true});else await addDoc(collection(db,"products"),{...data,createdAt:serverTimestamp()});resetProductForm();await loadAdminProducts();await loadProducts();toast("Account သိမ်းပြီးပါပြီ။")}
+ catch(err){console.error(err);toast("မသိမ်းနိုင်ပါ။ Firestore Rules / Admin UID ကိုစစ်ပါ။")}
+ finally{b.disabled=false}
+});
+window.resetProductForm=()=>{$("productForm").reset();$("editProductId").value="";$("productActive").checked=true};
+async function loadAdminProducts(){
+ try{const snap=await getDocs(collection(db,"products"));const all=snap.docs.map(d=>({id:d.id,...d.data()}));adminProducts=all;$("adminProductList").innerHTML=all.length?all.map(p=>`<div class="adminItem"><div><b>${esc(p.name)}</b><small>${p.game} · ${money(p.price)} · ${p.active?"Visible":"Hidden"}</small></div><div class="row" style="flex:0 0 auto"><button class="secondary" onclick="editProduct('${p.id}')">Edit</button><button class="danger" onclick="removeProduct('${p.id}')">Delete</button></div></div>`).join(""):'<p class="note">Product မရှိသေးပါ။</p>'}
+ catch(e){$("adminProductList").textContent="Admin access မရပါ။ Firestore Rules ထဲက ADMIN_UID ကို စစ်ပါ။";console.error(e)}
+}
+window.editProduct=id=>{const p=adminProducts.find(x=>x.id===id);if(!p)return;$("editProductId").value=p.id;$("game").value=p.game;$("productName").value=p.name;$("productPrice").value=p.price;$("productDetails").value=p.details||"";$("productImage").value=p.image||"";$("productActive").checked=!!p.active;$("productForm").scrollIntoView({behavior:"smooth"})};
+window.removeProduct=async id=>{if(!confirm("ဒီ Account ကို ဖျက်မှာ သေချာပါသလား?"))return;try{await deleteDoc(doc(db,"products",id));await loadAdminProducts();await loadProducts();toast("ဖျက်ပြီးပါပြီ။")}catch(e){toast("ဖျက်မရပါ။ Admin permission စစ်ပါ။")}};
+async function loadOrders(){
+ $("adminOrderList").textContent="Loading orders...";
+ try{const snap=await getDocs(query(collection(db,"orders"),orderBy("createdAt","desc")));const rows=snap.docs.map(d=>({id:d.id,...d.data()}));$("adminOrderList").innerHTML=rows.length?rows.map(o=>`<div class="adminItem" style="align-items:flex-start"><div><b>${esc(o.productName)}</b><small>${esc(o.game)} · ${money(o.price)}</small><small>Customer: ${esc(o.customerName)} · ${esc(o.customerContact)}</small><small>Note: ${esc(o.customerNote||"-")}</small><small class="status">Status: ${esc(o.status||"Pending")}</small></div><div style="min-width:112px"><select onchange="changeOrderStatus('${o.id}',this.value)" style="width:100%;background:#0e0e12;color:white;padding:7px;border:1px solid #62502b;border-radius:8px"><option ${o.status==="Pending"?"selected":""}>Pending</option><option ${o.status==="Confirmed"?"selected":""}>Confirmed</option><option ${o.status==="Completed"?"selected":""}>Completed</option><option ${o.status==="Cancelled"?"selected":""}>Cancelled</option></select></div></div>`).join(""):'<p>Order မရှိသေးပါ။</p>'}
+ catch(e){$("adminOrderList").textContent="Order များဖတ်မရပါ။ Admin UID / Rules ကိုစစ်ပါ။";console.error(e)}
+}
+window.changeOrderStatus=async(id,status)=>{try{await updateDoc(doc(db,"orders",id),{status,updatedAt:serverTimestamp()});toast("Order Status ပြောင်းပြီးပါပြီ။")}catch(e){toast("Status ပြောင်းမရပါ။")}};
+$("year").textContent=new Date().getFullYear();
+if(firebaseConfig.apiKey==="PASTE_API_KEY"||firebaseConfig.appId==="PASTE_APP_ID"){
+ $("productGrid").innerHTML='<div class="empty">Firebase Web App Config မထည့်ရသေးပါ။ SETUP.txt ကိုဖတ်ပြီး Config ထည့်ပါ။</div>';
+}else{loadProducts()}
+</script>
+</body></html>
