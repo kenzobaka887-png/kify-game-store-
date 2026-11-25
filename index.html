@@ -98,7 +98,8 @@
         }
 
         .account-banner-art {
-            background: linear-gradient(125deg, rgba(9, 18, 34, 0.95) 0%, rgba(14, 30, 56, 0.88) 55%, rgba(8, 15, 29, 0.97) 100%);
+            background:
+                linear-gradient(125deg, rgba(9, 18, 34, 0.95) 0%, rgba(14, 30, 56, 0.88) 55%, rgba(8, 15, 29, 0.97) 100%);
             position: relative;
             overflow: hidden;
         }
@@ -163,7 +164,7 @@
                 </div>
             </div>
 
-            <!-- Navigation Tabs Row -->
+            <!-- Navigation Tabs Row: Hub, Accounts, PUBG Mobile, Dia Top-Up, TG & Stars -->
             <nav aria-label="Primary Navigation" class="flex items-center gap-1.5 overflow-x-auto pb-0.5">
                 <button type="button" id="nav-hub" onclick="navigateTo('hub')"
                     class="nav-tab px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer">
@@ -242,9 +243,6 @@
                             <h2 class="text-xl sm:text-2xl font-extrabold text-white">
                                 PUBG အကောင့်ဈေးနှုန်းများ
                             </h2>
-                            <p class="text-xs sm:text-sm text-slate-400 mt-1">
-                                Mythic Fashion, Glacier/Upgradeable Guns နှင့် Max RP အကောင့်များကို ကြည့်ရှုဝယ်ယူနိုင်ပါသည်။
-                            </p>
                         </div>
                     </div>
 
@@ -356,4 +354,5 @@
                     </div>
 
                     <div class="md:col-span-3">
-                        <select id="accountStatusFilter" onchang
+                        <select id="accountStatusFilter" onchange="renderAccountsView()"
+                            class="w-full bg-[#080d16] border border-armory-border focus:border-blue-500 rounded-xl px-3 py-2 text-xs sm:text-sm 
